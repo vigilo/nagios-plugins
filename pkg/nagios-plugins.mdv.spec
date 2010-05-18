@@ -18,10 +18,8 @@ Requires:   sudo
 Requires:   nmap
 #Requires:   openipmi
 #Requires:   ipmitool
-# remplacement nagios-check_tcp par nagios-plugins-tcp pour RedHat 5.2
-#Requires:   nagios-check_tcp
-Requires:   nagios-plugins-tcp
-#Requires:   nagios-check_ntp
+Requires:   nagios-check_tcp
+Requires:   nagios-check_ntp
 
 # Rename from nagios-plugins-vigilo
 Obsoletes:  nagios-plugins-vigilo < 1.6-2
