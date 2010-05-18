@@ -1,0 +1,38 @@
+#!/bin/sh
+if [ $# -ne 2 ]
+then
+	echo 'UNKNOWN: usage: $0 warnSYSIOWThesh critSYSIOThresh'
+	exit 3
+fi
+if [ $1 -gt $2 ]
+then
+	echo 'UNKNOWN: warning, warningThreshold > criticalThreshold'
+	exit 3
+fi
+
+case `uname` in
+	AIX)   fields=`vmstat 1 1|tail -1 | tr -s ' ' | cut -d ' ' -f 16,18`;;
+	Linux) fields=`vmstat 1 2|tail -1 | tr -s ' ' | cut -d ' ' -f 15,17`;;
+	SunOS) fields=`iostat -c 1 2|tail -1 | tr -s ' ' | cut -d ' ' -f 3,4`;;
+	*)
+		echo "UNKNOWN: dunno how to get `uname` cpu usage on `uname`"
+		exit 3
+	;;
+esac
+
+f1=`echo $fields | cut -d ' ' -f1`
+f2=`echo $fields | cut -d ' ' -f2`
+sum=`expr $f1 + $f2`
+msg="System+IOWait CPU usage is $sum% (warn = $1%, crit = $2%)"
+if [ $sum -ge $2 ]
+then
+	echo "CRITICAL: $msg"
+	exit 2
+fi
+if [ $sum -ge $1 ]
+then
+	echo "WARNING: $msg"
+	exit 1
+fi
+echo "OK: $msg"
+exit 0

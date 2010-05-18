@@ -1,0 +1,4 @@
+define command{
+        command_name    check_megaraid
+        command_line    /usr/bin/sudo @LIBDIR@/nagios/plugins/check_megaraid
+}

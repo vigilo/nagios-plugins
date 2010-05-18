@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+#
+. `dirname $0`/utils.sh
+
+res=`MegaCli -LDInfo -Lall -aALL`
+code=$?
+if [ $code -ne 0 ]
+then
+    $ECHO "UNKNOWN: MegaCli returned code: $code\n"
+    exit $STATE_UNKNOWN
+fi
+
+res=`awk '/^State: /{print $2}' <<EOF
+$res
+EOF`
+
+nbItems=`echo $res | wc -w`
+failed=`grep -v Optimal <<EOF
+$res
+EOF`
+
+if [ -z "$failed" ]
+then
+    if [ $nbItems -eq 1 ]
+    then
+       $ECHO "OK: RAID state is optimal for the installed logical Drive\n"
+    else
+       $ECHO "OK: RAID state is optimal for all of the $nbItems installed logical Drive(s)\n"
+    fi
+    exit $STATE_OK
+fi
+$ECHO "CRITICAL: RAID state is degraded\n"
+exit $STATE_CRITICAL

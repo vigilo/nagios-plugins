@@ -1,0 +1,4 @@
+define command{
+        command_name    check_ipmi
+        command_line    @LIBDIR@/nagios/plugins/check_ipmi
+}

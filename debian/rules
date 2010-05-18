@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+
+build: 
+
+clean:
+	dh_testdir
+	dh_testroot
+	dh_clean 
+
+install: 
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	for plugin in `ls plugins/check_*`; do \
+		if echo $$plugin | grep -qs "_hp_"; then \
+			install -p -m 755 $$plugin $(CURDIR)/debian/nagios-plugins-hp/usr/lib/nagios/plugins/; \
+		else \
+			install -p -m 755 $$plugin $(CURDIR)/debian/nagios-plugins-vigilo/usr/lib/nagios/plugins/; \
+		fi; \
+	done
+	install -p -m 755 plugins/perfdata $(CURDIR)/debian/nagios-plugins-vigilo/usr/lib/nagios/plugins/; \
+	cp -p conf/*.cfg $(CURDIR)/debian/nagios-plugins-vigilo/etc/nagios-plugins/config/
+	dh_install
+
+binary: install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs 
+	dh_strip
+	dh_compress 
+	dh_fixperms
+	dh_perl
+	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+.PHONY: build clean binary install

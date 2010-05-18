@@ -1,0 +1,4 @@
+define command{
+        command_name    check_cpu
+        command_line    @LIBDIR@/nagios/plugins/check_cpu $ARG1$ $ARG2$
+}

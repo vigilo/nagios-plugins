@@ -1,0 +1,25 @@
+#! /bin/sh -x
+
+. `dirname $0`/utils.sh
+getIt()
+{
+    returnString=`curl -o /dev/null -s -w "%{http_code}" -k --proxy "http://$1:$2" "$3"`
+    exitCode=$?
+    if [ $exitCode -ne 0 ]
+    then
+        $ECHO "CRITICAL: curl return code: $exitCode\n"
+        exit $STATE_CRITICAL
+    else
+        $ECHO "OK: HTTP return code: $returnString\n"
+        exit $STATE_OK
+    fi
+}
+
+if [ $# -ne 3 ]
+then
+    $ECHO "usage : $0 host proxy_port url\n"
+    exit $STATE_UNKNOWN
+else
+    getIt $1 $2 $3
+fi
+

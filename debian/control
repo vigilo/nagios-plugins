@@ -1,0 +1,18 @@
+Source: nagios-plugins-vigilo
+Section: vigilo
+Priority: extra
+Maintainer: Aurélien BOMPARD <aurelien.bompard@c-s.fr>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
+
+Package: nagios-plugins-vigilo
+Architecture: all
+Depends: snmp, sudo, nmap, openipmi, ipmitool
+Description: Additional Nagios plugins
+ Additionnal plugins for the Nagios supervision system
+
+Package: nagios-plugins-hp
+Architecture: all
+Depends: hpasm, snmp 
+Description: Nagios Plugins for HP servers
+ Nagios Plugins for HP servers

@@ -1,0 +1,116 @@
+#! /bin/sh
+#
+# Simple UDP check
+# Written by Aurelien Bompard <aurelien@bompard.org>
+# Last Modified: 2007-08-21
+#
+# Usage: ./check_udp_simple -H host -p port
+# 
+# Needs sudo rights
+
+PROGNAME=`/usr/bin/basename $0`
+PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
+REVISION=`echo '$Revision: 1.7 $' | sed -e 's/[^0-9.]//g'`
+
+#. $PROGPATH/utils.sh
+. @LIBDIR@/nagios/plugins/utils.sh
+
+print_usage() {
+    echo "Usage: $PROGNAME -F logfile -O oldlog -q query"
+    echo "Usage: $PROGNAME --help"
+    echo "Usage: $PROGNAME --version"
+}
+
+print_help() {
+    print_revision $PROGNAME $REVISION
+    echo ""
+    print_usage
+    echo ""
+    echo "Log file pattern detector plugin for Nagios"
+    echo ""
+    support
+}
+
+# Make sure the correct number of command line
+# arguments have been supplied
+
+if [ $# -lt 1 ]; then
+    print_usage
+    exit $STATE_UNKNOWN
+fi
+
+# Grab the command line arguments
+
+#logfile=$1
+#oldlog=$2
+#query=$3
+exitstatus=$STATE_WARNING #default
+while test -n "$1"; do
+    case "$1" in
+        --help)
+            print_help
+            exit $STATE_OK
+            ;;
+        -h)
+            print_help
+            exit $STATE_OK
+            ;;
+        --version)
+            print_revision $PROGNAME $VERSION
+            exit $STATE_OK
+            ;;
+        -V)
+            print_revision $PROGNAME $VERSION
+            exit $STATE_OK
+            ;;
+        -H)
+            host=$2
+            shift
+            ;;
+        -p)
+            port=$2
+            shift
+            ;;
+        *)
+            echo "Unknown argument: $1"
+            print_usage
+            exit $STATE_UNKNOWN
+            ;;
+    esac
+    shift
+done
+
+
+
+if [ -z "$host" ]; then
+    echo "Host not specified (-H)"
+    exit $STATE_UNKNOWN
+fi
+if [ -z "$port" ]; then
+    echo "Port not specified (-p)"
+    exit $STATE_UNKNOWN
+fi
+
+sudo=`which sudo 2>/dev/null`
+if [ $? -ne 0 ]; then
+    echo "Sudo not found"
+    exit $STATE_UNKNOWN
+fi
+nmap=`which nmap 2>/dev/null`
+if [ $? -ne 0 ]; then
+    echo "Nmap not found"
+    exit $STATE_UNKNOWN
+fi
+
+
+check_data=`$sudo $nmap -sU -p $port $host | awk "/^$port/ {print \\\$2}"`
+case "$check_data" in
+    open*)
+        echo "port $port is available"
+        exit $STATE_OK
+        ;;
+    *)
+        echo "port $port is not available"
+        exit $STATE_CRITICAL
+        ;;
+esac
