@@ -1,7 +1,7 @@
 %define module  nagios-plugins
 %define name    vigilo-%{module}
 %define version 1.6
-%define release 4
+%define release 5
 
 Name:       %{name}
 Summary:    Additional Nagios plugins
@@ -12,14 +12,13 @@ URL:        http://www.projet-vigilo.org
 Group:      System/Servers
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-build
 License:    GPLv2
-#Buildarch:  noarch
-Requires:   net-snmp-utils
+Buildarch:  noarch
+###############################
+#Requires:   net-snmp-utils
 Requires:   sudo
 Requires:   nmap
-#Requires:   openipmi
-#Requires:   ipmitool
-Requires:   nagios-check_tcp
-Requires:   nagios-check_ntp
+Requires:   ipmitool
+Requires:   curl
 
 # Rename from nagios-plugins-vigilo
 Obsoletes:  nagios-plugins-vigilo < 1.6-2
@@ -30,6 +29,7 @@ Provides:   nagios-plugins-vigilo = %{version}-%{release}
 Additional Nagios plugins
 Additionnal plugins for the Nagios supervision system
 This application is part of the Vigilo Project <http://vigilo-project.org>
+
 
 %package    hp    
 Summary:    Additionnal plugins for HP servers
@@ -44,6 +44,108 @@ Provides:   nagios-plugins-vigilo-hp = %{version}-%{release}
 Additionnal Nagios Plugins
 Additionnal plugins for HP servers
 This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     bgp
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+
+%description bgp
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     cpu
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+
+%description cpu
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     https_via_proxy
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+Requires:   curl
+
+%description https_via_proxy
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     ipmi
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+Requires:   ipmitool
+
+%description ipmi
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     megaraid
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+
+%description megaraid
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     ospf2
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+
+%description ospf2
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     ospf
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+
+%description ospf
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     raid
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+Requires:   sudo
+
+%description raid
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     rrd
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+
+%description rrd
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     sysuptime
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+
+%description sysuptime
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     udp_simple
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+Requires:   sudo
+Requires:   nmap
+
+%description udp_simple
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package     win_procs
+Summary:     Additionnal plugins for nagios
+Group:      System/Servers
+
+%description win_procs
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
 
 %prep
 %setup -q -n %{module}
@@ -91,8 +193,59 @@ rm -rf $RPM_BUILD_ROOT
 %_libdir/nagios/plugins/check_snmp_hp_temp
 %_libdir/nagios/plugins/check_snmp_hp_fan
 
+%files bgp
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_bgp
+
+%files cpu
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_cpu
+
+%files https_via_proxy
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_https_via_proxy
+
+%files ipmi
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_ipmi
+
+%files megaraid
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_megaraid
+
+%files ospf2
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_ospf2
+
+%files ospf
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_ospf
+
+%files raid
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_raid
+
+%files rrd
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_rrd
+
+%files sysuptime
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_sysuptime
+
+%files udp_simple
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_udp_simple
+
+%files win_procs
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_win_procs
+
 
 %changelog
+* Fri Aug 06 2010  Thomas Burguiere <thomas.burguiere@c-s.fr>
+- modification to have one rpm per check
+
 * Wed Jan 13 2010  Thomas Burguiere <thomas.burguiere@c-s.fr>
 - modification for relocalisation
 
@@ -104,4 +257,3 @@ rm -rf $RPM_BUILD_ROOT
 
 * Fri Feb 27 2009  Thomas Burguiere <thomas.burguiere@c-s.fr>
 - first creation of the RPM from debian archive
-
