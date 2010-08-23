@@ -1,3 +1,4 @@
+NAME = nagios-plugins
 PREFIX = /usr
 LIBDIR = $(PREFIX)/lib
 PLUGINDIR = $(LIBDIR)/nagios/plugins
