@@ -1,4 +1,3 @@
-%define _source_payload w9.gzdio 
 %define module  nagios-plugins
 %define name    vigilo-%{module}
 %define version 1.6
