@@ -2,19 +2,8 @@ PREFIX = /usr
 LIBDIR = $(PREFIX)/lib
 PLUGINDIR = $(LIBDIR)/nagios/plugins
 SYSCONFDIR = /etc
+include buildenv/Makefile.common
 
-define find-distro
-if [ -f /etc/debian_version ]; then \
-	echo "debian" ;\
-elif [ -f /etc/mandriva-release ]; then \
-	echo "mandriva" ;\
-elif [ -f /etc/redhat-release ]; then \
-	echo "redhat" ;\
-else \
-	echo "unknown" ;\
-fi
-endef
-DISTRO := $(shell $(find-distro))
 ifeq ($(DISTRO),debian)
 	CONFDIR = $(SYSCONFDIR)/nagios-plugins/config
 else ifeq ($(DISTRO),mandriva)
