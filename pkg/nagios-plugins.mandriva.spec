@@ -2,6 +2,8 @@
 %define name    vigilo-%{module}
 %define version 1.6
 %define release %mkrel 6%{?svn}
+%define nagios_plugins_cfg plugins.d/
+
 
 Name:       %{name}
 Summary:    Additional Nagios plugins
@@ -166,7 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc COPYING nrpe_local.cfg
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/*
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/*
 %{_libdir}/nagios/plugins/check_bgp
 %{_libdir}/nagios/plugins/check_cpu
 %{_libdir}/nagios/plugins/check_https_via_proxy
@@ -200,22 +202,22 @@ rm -rf $RPM_BUILD_ROOT
 %files cpu
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_cpu
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_cpu.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_cpu.cfg
 
 %files https_via_proxy
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_https_via_proxy
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_proxy_ssl.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_proxy_ssl.cfg
 
 %files ipmi
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_ipmi
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ipmi.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_ipmi.cfg
 
 %files megaraid
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_megaraid
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_megaraid.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_megaraid.cfg
 
 %files ospf2
 %defattr(-,root,root)
@@ -232,7 +234,7 @@ rm -rf $RPM_BUILD_ROOT
 %files rrd
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_rrd
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_rrd.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_rrd.cfg
 
 %files sysuptime
 %defattr(-,root,root)
@@ -241,7 +243,7 @@ rm -rf $RPM_BUILD_ROOT
 %files udp_simple
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_udp_simple
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_udp_simple.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_udp_simple.cfg
 
 %files win_procs
 %defattr(-,root,root)
