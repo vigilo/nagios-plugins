@@ -1,7 +1,7 @@
 %define module  nagios-plugins
 %define name    vigilo-%{module}
 %define version 1.6
-%define release %mkrel 5%{?svn}
+%define release %mkrel 6%{?svn}
 
 Name:       %{name}
 Summary:    Additional Nagios plugins
@@ -249,6 +249,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Aug 24 2010  BURGUIERE Thomas <thomas.burguiere@c-s.fr>
+- modification to have specific mandriva spec file
+
 * Fri Aug 06 2010  Thomas Burguiere <thomas.burguiere@c-s.fr>
 - modification to have one rpm per check
 
