@@ -200,22 +200,22 @@ rm -rf $RPM_BUILD_ROOT
 %files cpu
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_cpu
-%config(noreplace) %{_sysconfdir}/nagios/objects/*
+%config(noreplace) %{_sysconfdir}/nagios/objects/check_cpu.cfg
 
 %files https_via_proxy
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_https_via_proxy
-%config(noreplace) %{_sysconfdir}/nagios/objects/*
+%config(noreplace) %{_sysconfdir}/nagios/objects/check_proxy_ssl.cfg
 
 %files ipmi
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_ipmi
-%config(noreplace) %{_sysconfdir}/nagios/objects/*
+%config(noreplace) %{_sysconfdir}/nagios/objects/check_ipmi.cfg
 
 %files megaraid
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_megaraid
-%config(noreplace) %{_sysconfdir}/nagios/objects/*
+%config(noreplace) %{_sysconfdir}/nagios/objects/check_megaraid.cfg
 
 %files ospf2
 %defattr(-,root,root)
@@ -232,7 +232,7 @@ rm -rf $RPM_BUILD_ROOT
 %files rrd
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_rrd
-%config(noreplace) %{_sysconfdir}/nagios/objects/*
+%config(noreplace) %{_sysconfdir}/nagios/objects/check_rrd.cfg
 
 %files sysuptime
 %defattr(-,root,root)
@@ -241,7 +241,7 @@ rm -rf $RPM_BUILD_ROOT
 %files udp_simple
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_udp_simple
-%config(noreplace) %{_sysconfdir}/nagios/objects/*
+%config(noreplace) %{_sysconfdir}/nagios/objects/check_udp_simple.cfg
 
 %files win_procs
 %defattr(-,root,root)
