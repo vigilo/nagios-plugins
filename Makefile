@@ -3,6 +3,14 @@ PREFIX = /usr
 LIBDIR = $(PREFIX)/lib
 PLUGINDIR = $(LIBDIR)/nagios/plugins
 SYSCONFDIR = /etc
+
+SUBSTFILES = \
+	$(basename $(wildcard conf/*.in)) \
+	$(basename $(wildcard plugins/*.in)) \
+	nrpe_local.cfg
+
+all: $(SUBSTFILES)
+
 include buildenv/Makefile.common
 
 ifeq ($(DISTRO),debian)
@@ -14,12 +22,6 @@ else ifeq ($(DISTRO),redhat)
 else
 	CONFDIR = $(SYSCONFDIR)/nagios/plugins.d
 endif
-
-SUBSTFILES = $(basename $(wildcard conf/*.in)) \
-	$(basename $(wildcard plugins/*.in)) \
-	nrpe_local.cfg
-
-all_files: $(SUBSTFILES)
 
 conf/%: conf/%.in
 	sed -e 's,@LIBDIR@,$(LIBDIR),g' $^ > $@
@@ -34,7 +36,7 @@ install: install_files install_users install_permissions
 
 install_users:
 
-install_files: all_files
+install_files: $(SUBSTFILES)
 	mkdir -p $(DESTDIR)$(PLUGINDIR)/;
 	install -p -m 755 plugins/check_* $(DESTDIR)$(PLUGINDIR)/;
 	rm -f $(DESTDIR)$(PLUGINDIR)/*.in
@@ -47,4 +49,4 @@ clean:
 	find $(CURDIR) -name "*~" -exec rm {} \;
 	rm -f $(SUBSTFILES)
 
-.PHONY: install install_users install_files install_permissions clean
+.PHONY: all install install_users install_files install_permissions clean
