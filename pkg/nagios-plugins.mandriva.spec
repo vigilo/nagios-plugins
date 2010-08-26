@@ -21,6 +21,8 @@ Requires:   sudo
 Requires:   nmap
 Requires:   ipmitool
 Requires:   curl
+Requires:   smartmontools
+Requires:   mtx
 
 # Rename from nagios-plugins-vigilo
 Obsoletes:  nagios-plugins-vigilo < 1.6-2
@@ -148,6 +150,25 @@ Group:      System/Servers
 Additionnal Nagios Plugins
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
+%package    tape
+Summary:    Additionnal plugins for nagios
+Group:      System/Servers
+Requires:   smartmontools
+Requires:   mtx
+
+%description tape
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package    dell_openmanage
+Summary:    Additionnal plugins for nagios
+Group:      System/Servers
+
+%description dell_openmanage
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+
 
 %prep
 %setup -q -n %{module}
@@ -249,8 +270,19 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_libdir/nagios/plugins/check_win_procs
 
+%files tape
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_tape
+
+%files dell_openmanage
+%defattr(-,root,root)
+%_libdir/nagios/plugins/check_dell_openmanage*
+
 
 %changelog
+* Thu Aug 26 2010  BURGUIERE Thomas <thomas.burguiere@c-s.fr>
+- add new plugins (openmanage for Dell, and for generic tape and tape changer)
+
 * Tue Aug 24 2010  BURGUIERE Thomas <thomas.burguiere@c-s.fr>
 - modification to have specific mandriva spec file
 
