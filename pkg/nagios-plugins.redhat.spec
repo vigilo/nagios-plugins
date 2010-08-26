@@ -1,7 +1,7 @@
 %define module  nagios-plugins
 %define name    vigilo-%{module}
 %define version 1.6
-%define release 6%{?dist}
+%define release 7%{?dist}
 %define nagios_plugins_cfg objects/
 
 Name:       %{name}
