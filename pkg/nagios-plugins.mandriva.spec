@@ -4,7 +4,6 @@
 %define release %mkrel 7%{?svn}
 %define nagios_plugins_cfg plugins.d/
 
-
 Name:       %{name}
 Summary:    Additional Nagios plugins
 Version:    %{version}
