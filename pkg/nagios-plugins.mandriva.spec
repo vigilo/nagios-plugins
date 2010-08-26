@@ -23,7 +23,7 @@ Requires:   ipmitool
 Requires:   curl
 Requires:   smartmontools
 Requires:   mtx
-Requires:   /usr/bin/omreport
+Requires:   srvadmin-omacore
 Requires:   perl
 
 # Rename from nagios-plugins-vigilo
@@ -165,7 +165,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 %package    dell_openmanage
 Summary:    Additionnal plugins for nagios
 Group:      System/Servers
-Requires:   /usr/bin/omreport
+Requires:   srvadmin-omacore
 Requires:   perl
 
 %description dell_openmanage
