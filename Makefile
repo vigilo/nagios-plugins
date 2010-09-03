@@ -1,8 +1,6 @@
 NAME = nagios-plugins
-PREFIX = /usr
 LIBDIR = $(PREFIX)/lib
 PLUGINDIR = $(LIBDIR)/nagios/plugins
-SYSCONFDIR = /etc
 
 SUBSTFILES = \
 	$(basename $(wildcard conf/*.in)) \
