@@ -190,7 +190,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %doc COPYING nrpe_local.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/*
 %{_libdir}/nagios/plugins/check_bgp
@@ -208,7 +208,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nagios/plugins/check_sysuptime
 
 %files hp
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %doc COPYING
 %_libdir/nagios/plugins/check_hp_fan
 %_libdir/nagios/plugins/check_hp_power_supplies
@@ -220,65 +220,65 @@ rm -rf $RPM_BUILD_ROOT
 %_libdir/nagios/plugins/check_snmp_hp_fan
 
 %files bgp
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_bgp
 
 %files cpu
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_cpu
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_cpu.cfg
 
 %files https_via_proxy
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_https_via_proxy
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_proxy_ssl.cfg
 
 %files ipmi
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_ipmi
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_ipmi.cfg
 
 %files megaraid
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_megaraid
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_megaraid.cfg
 
 %files ospf2
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_ospf2
 
 %files ospf
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_ospf
 
 %files raid
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_raid
 
 %files rrd
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_rrd
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_rrd.cfg
 
 %files sysuptime
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_sysuptime
 
 %files udp_simple
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_udp_simple
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_udp_simple.cfg
 
 %files win_procs
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_win_procs
 
 %files tape
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_tape
 
 %files dell_openmanage
-%defattr(-,root,root)
+%defattr(644,root,root,755)
 %_libdir/nagios/plugins/check_dell_openmanage*
 
 
