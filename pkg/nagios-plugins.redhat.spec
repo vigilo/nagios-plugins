@@ -36,7 +36,7 @@ Additionnal plugins for the Nagios supervision system
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 
-%package    hp    
+%package    hp
 Summary:    Additionnal plugins for HP servers
 #Requires:   hpasm
 Requires:   net-snmp-utils
@@ -193,93 +193,93 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYING nrpe_local.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/*
-%{_libdir}/nagios/plugins/check_bgp
-%{_libdir}/nagios/plugins/check_cpu
-%{_libdir}/nagios/plugins/check_https_via_proxy
-%{_libdir}/nagios/plugins/check_ipmi
-%{_libdir}/nagios/plugins/check_megaraid
-%{_libdir}/nagios/plugins/check_ospf
-%{_libdir}/nagios/plugins/check_ospf2
-%{_libdir}/nagios/plugins/check_raid
-%{_libdir}/nagios/plugins/check_rrd
-#%{_libdir}/nagios/plugins/check_tacacs
-%{_libdir}/nagios/plugins/check_udp_simple
-%{_libdir}/nagios/plugins/check_win_procs
-%{_libdir}/nagios/plugins/check_sysuptime
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_bgp
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_cpu
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_https_via_proxy
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_ipmi
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_megaraid
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_ospf
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_ospf2
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_raid
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_rrd
+#%attr(755,root,root) %{_libdir}/nagios/plugins/check_tacacs
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_udp_simple
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_win_procs
+%attr(755,root,root) %{_libdir}/nagios/plugins/check_sysuptime
 
 %files hp
 %defattr(644,root,root,755)
 %doc COPYING
-%_libdir/nagios/plugins/check_hp_fan
-%_libdir/nagios/plugins/check_hp_power_supplies
-%_libdir/nagios/plugins/check_hp_raid
-%_libdir/nagios/plugins/check_hp_temp
-%_libdir/nagios/plugins/check_snmp_hp_power_supplies
-%_libdir/nagios/plugins/check_snmp_hp_raid
-%_libdir/nagios/plugins/check_snmp_hp_temp
-%_libdir/nagios/plugins/check_snmp_hp_fan
+%attr(755,root,root) %_libdir/nagios/plugins/check_hp_fan
+%attr(755,root,root) %_libdir/nagios/plugins/check_hp_power_supplies
+%attr(755,root,root) %_libdir/nagios/plugins/check_hp_raid
+%attr(755,root,root) %_libdir/nagios/plugins/check_hp_temp
+%attr(755,root,root) %_libdir/nagios/plugins/check_snmp_hp_power_supplies
+%attr(755,root,root) %_libdir/nagios/plugins/check_snmp_hp_raid
+%attr(755,root,root) %_libdir/nagios/plugins/check_snmp_hp_temp
+%attr(755,root,root) %_libdir/nagios/plugins/check_snmp_hp_fan
 
 %files bgp
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_bgp
+%attr(755,root,root) %_libdir/nagios/plugins/check_bgp
 
 %files cpu
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_cpu
+%attr(755,root,root) %_libdir/nagios/plugins/check_cpu
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_cpu.cfg
 
 %files https_via_proxy
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_https_via_proxy
+%attr(755,root,root) %_libdir/nagios/plugins/check_https_via_proxy
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_proxy_ssl.cfg
 
 %files ipmi
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_ipmi
+%attr(755,root,root) %_libdir/nagios/plugins/check_ipmi
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_ipmi.cfg
 
 %files megaraid
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_megaraid
+%attr(755,root,root) %_libdir/nagios/plugins/check_megaraid
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_megaraid.cfg
 
 %files ospf2
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_ospf2
+%attr(755,root,root) %_libdir/nagios/plugins/check_ospf2
 
 %files ospf
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_ospf
+%attr(755,root,root) %_libdir/nagios/plugins/check_ospf
 
 %files raid
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_raid
+%attr(755,root,root) %_libdir/nagios/plugins/check_raid
 
 %files rrd
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_rrd
+%attr(755,root,root) %_libdir/nagios/plugins/check_rrd
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_rrd.cfg
 
 %files sysuptime
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_sysuptime
+%attr(755,root,root) %_libdir/nagios/plugins/check_sysuptime
 
 %files udp_simple
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_udp_simple
+%attr(755,root,root) %_libdir/nagios/plugins/check_udp_simple
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_udp_simple.cfg
 
 %files win_procs
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_win_procs
+%attr(755,root,root) %_libdir/nagios/plugins/check_win_procs
 
 %files tape
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_tape
+%attr(755,root,root) %_libdir/nagios/plugins/check_tape
 
 %files dell_openmanage
 %defattr(644,root,root,755)
-%_libdir/nagios/plugins/check_dell_openmanage*
+%attr(755,root,root) %_libdir/nagios/plugins/check_dell_openmanage*
 
 
 %changelog
