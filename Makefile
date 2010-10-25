@@ -37,7 +37,7 @@ conf/%: conf/%.in
 	sed -e 's,@LIBDIR@,$(LIBDIR),g' $^ > $@
 
 plugins/%: plugins/%.in
-	sed -e 's,@LIBDIR@,$(LIBDIR),g' $^ > $@
+	sed -e 's,@LIBDIR@,$(LIBDIR),g' -e 's,@PYTHON@,$(PYTHON),g' $^ > $@
 
 nrpe_local.cfg: nrpe_local.cfg.in
 	sed -e 's,@LIBDIR@,$(LIBDIR),g;s,@BINDIR@,$(BINDIR),g;s,@SYSCONFDIR@,$(SYSCONFDIR),g' nrpe_local.cfg.in > nrpe_local.cfg

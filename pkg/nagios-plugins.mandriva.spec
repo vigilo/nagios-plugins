@@ -180,7 +180,13 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} install DESTDIR=$RPM_BUILD_ROOT LIBDIR=%{_libdir} BINDIR=%{_bindir}
+make install \
+    PREFIX=%{_prefix}
+    SYSCONFDIR=%{_sysconfdir}
+    DESTDIR=$RPM_BUILD_ROOT
+    LIBDIR=%{_libdir}
+    BINDIR=%{_bindir}
+    PYTHON=%{_bindir}/python
 # pas nécessaire sur cea
 #rm -f $RPM_BUILD_ROOT%_libdir/nagios/plugins/check_tacacs
 

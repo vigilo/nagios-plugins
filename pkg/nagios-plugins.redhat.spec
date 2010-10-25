@@ -3,6 +3,9 @@
 %define version 1.6
 %define release 7%{?dist}
 %define nagios_plugins_cfg objects/
+%define pyver 26
+%define pybasever 2.6
+%define __python /usr/bin/python%{pybasever}
 
 Name:       %{name}
 Summary:    Additional Nagios plugins
@@ -180,7 +183,13 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make PREFIX=%{_prefix} SYSCONFDIR=%{_sysconfdir} install DESTDIR=$RPM_BUILD_ROOT LIBDIR=%{_libdir} BINDIR=%{_bindir}
+make install \
+    PREFIX=%{_prefix}
+    SYSCONFDIR=%{_sysconfdir}
+    DESTDIR=$RPM_BUILD_ROOT
+    LIBDIR=%{_libdir}
+    BINDIR=%{_bindir}
+    PYTHON=%{__python}
 # pas nécessaire sur cea
 #rm -f $RPM_BUILD_ROOT%_libdir/nagios/plugins/check_tacacs
 
