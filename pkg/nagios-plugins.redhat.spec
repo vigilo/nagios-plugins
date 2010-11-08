@@ -1,7 +1,7 @@
 %define module  nagios-plugins
 %define name    vigilo-%{module}
 %define version 1.6
-%define release 7%{?dist}
+%define release 8%{?dist}
 %define nagios_plugins_cfg objects/
 %define pyver 26
 %define pybasever 2.6
@@ -27,6 +27,21 @@ Requires:   smartmontools
 Requires:   mtx
 Requires:   srvadmin-omacore
 Requires:   perl
+Requires:   vigilo-nagios-plugins-bgp
+Requires:   vigilo-nagios-plugins-cpu
+Requires:   vigilo-nagios-plugins-dell_openmanage
+Requires:   vigilo-nagios-plugins-hp
+Requires:   vigilo-nagios-plugins-https_via_proxy
+Requires:   vigilo-nagios-plugins-ipmi
+Requires:   vigilo-nagios-plugins-megaraid
+Requires:   vigilo-nagios-plugins-ospf
+Requires:   vigilo-nagios-plugins-ospf2
+Requires:   vigilo-nagios-plugins-raid
+Requires:   vigilo-nagios-plugins-rrd
+Requires:   vigilo-nagios-plugins-sysuptime
+Requires:   vigilo-nagios-plugins-tape
+Requires:   vigilo-nagios-plugins-udp_simple
+Requires:   vigilo-nagios-plugins-win_procs
 
 # Rename from nagios-plugins-vigilo
 Obsoletes:  nagios-plugins-vigilo < 1.6-2
@@ -201,20 +216,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING nrpe_local.cfg
-%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/*
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_bgp
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_cpu
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_https_via_proxy
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_ipmi
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_megaraid
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_ospf
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_ospf2
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_raid
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_rrd
-#%attr(755,root,root) %{_libdir}/nagios/plugins/check_tacacs
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_udp_simple
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_win_procs
-%attr(755,root,root) %{_libdir}/nagios/plugins/check_sysuptime
 
 %files hp
 %defattr(644,root,root,755)
@@ -292,6 +293,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Nov 08 2010  BURGUIERE Thomas <thomas.burguiere@c-s.fr>
+- make vigilo-nagios-plugins a meta package
+
 * Thu Aug 26 2010  BURGUIERE Thomas <thomas.burguiere@c-s.fr>
 - add new plugins (openmanage for Dell, and for generic tape and tape changer)
 
