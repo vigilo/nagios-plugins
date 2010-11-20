@@ -1,7 +1,7 @@
 %define module  nagios-plugins
 %define name    vigilo-%{module}
-%define version 1.6
-%define release 8%{?dist}
+%define version 1.7
+%define release 1%{?svn}%{?dist}
 %define nagios_plugins_cfg objects/
 %define pyver 26
 %define pybasever 2.6
