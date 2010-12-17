@@ -186,6 +186,14 @@ Requires:   perl
 Additionnal Nagios Plugins
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
+%package    toip
+Summary:    Additionnal plugins for nagios
+Group:      System/Servers
+Requires:   python
+
+%description toip
+Additionnal Nagios Plugins
+This application is part of the Vigilo Project <http://vigilo-project.org>
 
 
 %prep
@@ -287,6 +295,12 @@ rm -rf $RPM_BUILD_ROOT
 %files dell_openmanage
 %defattr(644,root,root,755)
 %attr(755,root,root) %_libdir/nagios/plugins/check_dell_openmanage*
+
+%files toip
+%defattr(644,root,root,755)
+%attr(755,root,root) %_libdir/nagios/plugins/check_mevo_capacity.py*
+%attr(755,root,root) %_libdir/nagios/plugins/check_ip_phones_or_ccda.py*
+%attr(755,root,root) %_libdir/nagios/plugins/check_free_position_ua_card.py*
 
 
 %changelog
