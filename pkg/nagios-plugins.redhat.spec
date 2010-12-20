@@ -305,6 +305,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %_libdir/nagios/plugins/check_mevo_capacity.py*
 %attr(755,root,root) %_libdir/nagios/plugins/check_ip_phones_or_ccda.py*
 %attr(755,root,root) %_libdir/nagios/plugins/check_free_position_ua_card.py*
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_mevo_capacity.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_free_position_ua_card.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_ip_phones_or_ccda.cfg
 
 
 %changelog
