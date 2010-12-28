@@ -39,3 +39,4 @@ command[check_ipmi]=/usr/bin/sudo @LIBDIR@/nagios/plugins/check_ipmi
 command[check_raid]=@LIBDIR@/nagios/plugins/check_raid
 command[check_cpu_args]=@LIBDIR@/nagios/plugins/check_cpu $ARG1$ $ARG2$
 command[check_rrd]=@LIBDIR@/nagios/plugins/check_rrd $ARG1$ $ARG2$ $ARG3$ $ARG4$
+command[check_nagios]=@LIBDIR@/nagios/plugins/check_nagiostats_vigilo STATUSFILEAGETT,180,300 TOTCMDBUF USEDCMDBUF NUMHOSTS NUMHSTUP NUMHSTDOWN NUMHSTUNR NUMSERVICES NUMSVCOK NUMSVCWARN NUMSVCUNKN NUMSVCCRIT AVGACTSVCLAT,30000,180000 AVGACTSVCEXT AVGPSVSVCLAT AVGACTHSTLAT AVGACTHSTEXT AVGPSVHSTLAT NUMHSTACTCHK5M NUMHSTSCHEDULED NUMSVCACTCHK5M NUMSVCSCHEDULED

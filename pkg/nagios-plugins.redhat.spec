@@ -55,7 +55,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 
 %package    hp
-Summary:    Additionnal plugins for HP servers
+Summary:    Additionnal plugins for Nagios: HP hardware
 #Requires:   hpasm
 Requires:   net-snmp-utils
 Group:      System/Servers
@@ -64,105 +64,105 @@ Obsoletes:  nagios-plugins-vigilo-hp < 1.6-2
 Provides:   nagios-plugins-vigilo-hp = %{version}-%{release}
 
 %description hp
-Additionnal Nagios Plugins
-Additionnal plugins for HP servers
+Additionnal Nagios plugins for HP hardware.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    bgp
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: BGP routing
 Group:      System/Servers
 
 %description bgp
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for BGP routing.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    cpu
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: CPU check
 Group:      System/Servers
 
 %description cpu
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for CPU checking.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    https_via_proxy
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: HTTPS/Proxy
 Group:      System/Servers
 Requires:   curl
 
 %description https_via_proxy
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for HTTPS over proxy checking.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    ipmi
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: IPMI-enabled hardware
 Group:      System/Servers
 Requires:   ipmitool
 
 %description ipmi
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for IPMI-enabled hardware.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    megaraid
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: LSI MegaRAID hardware
 Group:      System/Servers
+Requires:   megacli
 
 %description megaraid
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for LSI MegaRAID hardware.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    ospf2
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: OSPF2 routing
 Group:      System/Servers
 
 %description ospf2
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for OSPF2 routing.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    ospf
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: OSPF routing
 Group:      System/Servers
 
 %description ospf
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for OSPF2 routing.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    raid
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: software RAID on Linux
 Group:      System/Servers
 Requires:   sudo
 
 %description raid
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for software RAID on Linux.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    rrd
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: RRD databases
 Group:      System/Servers
 
 %description rrd
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for RRD databases.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    sysuptime
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: system uptime
 Group:      System/Servers
 
 %description sysuptime
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for system uptime.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    udp_simple
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: UDP-based servers
 Group:      System/Servers
 Requires:   sudo
 Requires:   nmap
 
 %description udp_simple
-Additionnal Nagios Plugins
+Additionnal Nagios plugins for UDP-based server.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    win_procs
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: MS Windows processes
 Group:      System/Servers
 
 %description win_procs
@@ -170,34 +170,42 @@ Additionnal Nagios Plugins
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    tape
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: tape backups
 Group:      System/Servers
 Requires:   smartmontools
 Requires:   mtx
 
 %description tape
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for tape backups.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    dell_openmanage
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: Dell hardware
 Group:      System/Servers
 Requires:   srvadmin-omacore
 Requires:   perl
 
 %description dell_openmanage
-Additionnal Nagios Plugins
+Additionnal Nagios plugin for Dell hardware.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    toip
-Summary:    Additionnal plugins for nagios
+Summary:    Additionnal plugins for Nagios: ToIP
 Group:      System/Servers
 Requires:   python%{pyver}
 
 %description toip
-Additionnal Nagios Plugins
+Additionnal Nagios plugins for IPBX and other ToIP appliances.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
+%package    nagios
+Summary:    Additionnal plugins for Nagios: Nagios itself
+Group:      System/Servers
+Requires:   python
+
+%description nagios
+Additionnal Nagios plugin to check the health of a Nagios server.
+This application is part of the Vigilo Project <http://vigilo-project.org>
 
 
 %prep
@@ -308,6 +316,10 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_mevo_capacity.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_free_position_ua_card.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_ip_phones_or_ccda.cfg
+
+%files nagios
+%defattr(644,root,root,755)
+%attr(755,root,root) %_libdir/nagios/plugins/check_nagiostats_vigilo
 
 
 %changelog
