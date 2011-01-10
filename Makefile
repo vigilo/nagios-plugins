@@ -5,7 +5,7 @@ PLUGINDIR = $(LIBDIR)/nagios/plugins
 SUBSTFILES = \
 	$(basename $(wildcard conf/*.in)) \
 	$(basename $(wildcard plugins/*.in)) \
-	nrpe_local.cfg
+	nrpe.cfg
 
 all: $(SUBSTFILES)
 
@@ -39,8 +39,8 @@ conf/%: conf/%.in
 plugins/%: plugins/%.in
 	sed -e 's,@LIBDIR@,$(LIBDIR),g' -e 's,@PYTHON@,$(PYTHON),g' $^ > $@
 
-nrpe_local.cfg: nrpe_local.cfg.in
-	sed -e 's,@LIBDIR@,$(LIBDIR),g;s,@BINDIR@,$(BINDIR),g;s,@SYSCONFDIR@,$(SYSCONFDIR),g' nrpe_local.cfg.in > nrpe_local.cfg
+nrpe.cfg: nrpe.cfg.in
+	sed -e 's,@LIBDIR@,$(LIBDIR),g;s,@BINDIR@,$(BINDIR),g;s,@SYSCONFDIR@,$(SYSCONFDIR),g' nrpe.cfg.in > nrpe.cfg
 
 install: install_files install_users install_permissions
 
@@ -52,6 +52,8 @@ install_files: $(SUBSTFILES)
 	rm -f $(DESTDIR)$(PLUGINDIR)/*.in
 	mkdir -p $(DESTDIR)$(CONFDIR)/
 	cp -p conf/*.cfg $(DESTDIR)$(CONFDIR)/
+	mkdir -p $(DESTDIR)$(SYSCONFDIR)/nrpe.d/
+	install -p -m 644 nrpe.cfg $(DESTDIR)$(SYSCONFDIR)/nrpe.d/vigilo.cfg
 
 install_permissions:
 

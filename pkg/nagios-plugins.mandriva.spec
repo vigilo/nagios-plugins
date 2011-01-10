@@ -51,6 +51,15 @@ Additionnal plugins for the Nagios supervision system
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 
+%package    -n vigilo-nrpe-config
+Summary:    NRPE configuration for the Vigilo plugins
+Group:      System/Servers
+Requires:   nrpe
+
+%description -n vigilo-nrpe-config
+This contains the Vigilo configuration for the Nagios Remote Plugin Executor.
+This package is part of the Vigilo Project <http://vigilo-project.org>
+
 %package    hp
 Summary:    Additionnal plugins for Nagios: HP hardware
 #Requires:   hpasm
@@ -227,9 +236,14 @@ make install \
 rm -rf $RPM_BUILD_ROOT
 
 
-%files
+#%files
+#%defattr(644,root,root,755)
+#%doc COPYING
+
+%files -n vigilo-nrpe-config
 %defattr(644,root,root,755)
-%doc COPYING nrpe_local.cfg
+%doc COPYING
+%config(noreplace) %{_sysconfdir}/nrpe.d/*.cfg
 
 %files hp
 %defattr(644,root,root,755)
