@@ -9,28 +9,7 @@ command[check_disk_var]=@LIBDIR@/nagios/plugins/check_disk -w 25 -c 5 -p /var
 command[check_total_procs]=@LIBDIR@/nagios/plugins/check_procs -w 150 -c 200
 command[check_apt]=@LIBDIR@/nagios/plugins/check_apt
 command[check_ntp]=@LIBDIR@/nagios/plugins/check_ntp -H pool.ntp.org
-command[check_procs_cfservd]=@LIBDIR@/nagios/plugins/check_procs -C cfservd -w 1:2 -c 1:3
-command[check_procs_sshd]=@LIBDIR@/nagios/plugins/check_procs -C sshd -w 1: -c 1:
-command[check_procs_hpasmd]=@LIBDIR@/nagios/plugins/check_procs -C hpasmd -w 1: -c 1:
-command[check_procs_syslog-ng]=@LIBDIR@/nagios/plugins/check_procs -C syslog-ng -w 1:1 -c 1:1
-command[check_procs_nrpe]=@LIBDIR@/nagios/plugins/check_procs -C nrpe -w 2: -c 2:
-command[check_procs_ntpd]=@LIBDIR@/nagios/plugins/check_procs -C ntpd -w 2: -c 2:
-command[check_procs_crond]=@LIBDIR@/nagios/plugins/check_procs -C cron -w 1: -c 1:
-command[check_procs_acpid]=@LIBDIR@/nagios/plugins/check_procs -C acpid -w 1:1 -c 1:1
-command[check_procs_nagios]=@LIBDIR@/nagios/plugins/check_procs -C nagios3 -w 1: -c 1:
-command[check_procs_mysql]=@LIBDIR@/nagios/plugins/check_procs -C mysqld -w 1:1 -c 1:1
 command[check_mysql]=@LIBDIR@/nagios/plugins/check_mysql -u root -p rootpassword
-command[check_procs_dhcpd]=@LIBDIR@/nagios/plugins/check_procs -C dhcpd3 -w 1:1 -c 1:1
-command[check_procs_tftpd]=@LIBDIR@/nagios/plugins/check_procs -C in.tftpd -w 1:1 -c 1:1
-command[check_procs_snmptrapd]=@LIBDIR@/nagios/plugins/check_procs -C snmptrapd -w 1:3 -c 1:5
-command[check_procs_secsecu]=@LIBDIR@/nagios/plugins/check_procs -a '/usr/bin/perl -w @BINDIR@/sec -input=- -conf=/etc/syslog-ng/reglesSecu.conf' -w 1:1 -c 1:1
-command[check_procs_syslog2mysql]=@LIBDIR@/nagios/plugins/check_procs -a '/bin/bash /usr/share/phpsyslogng/htdocs/scripts/syslog2mysql.sh' -u root -w 1:2 -c 1:2
-command[check_procs_corrsup1]=@LIBDIR@/nagios/plugins/check_procs -a '/usr/bin/perl -I @LIBDIR@/corrsup @BINDIR@/sec -intevents -conf=@SYSCONFDIR@/vigilo-vigiconf/prod/corrsup/transl.sec -pid=/var/run/corrsup/transl.pid -syslog=local2 -debug=2 -detach' -u correl -w 1:1 -c 1:1
-command[check_procs_corrsup2]=@LIBDIR@/nagios/plugins/check_procs -a '/usr/bin/perl -I @LIBDIR@/corrsup @BINDIR@/sec -intevents -conf=@SYSCONFDIR@/vigilo-vigiconf/prod/corrsup/correl.sec -pid=/var/run/corrsup/correl.pid -syslog=local1' -u correl -w 1:1 -c 1:1
-command[check_procs_corrsup3]=@LIBDIR@/nagios/plugins/check_procs -a '/usr/bin/perl -I @LIBDIR@/corrsup @BINDIR@/sec -intevents -conf=@SYSCONFDIR@/vigilo-vigiconf/prod/corrsup/reduct.sec -pid=/var/run/corrsup/reduct.pid -syslog=local0' -u correl -w 1:1 -c 1:1
-command[check_procs_corrsup4]=@LIBDIR@/nagios/plugins/check_procs -a 'socat -u -lylocal3 UDP4-RECV:50002 STDOUT' -u correl -w 1:1 -c 1:1
-command[check_procs_corrtrap1]=@LIBDIR@/nagios/plugins/check_procs -a '/usr/bin/perl -I @SYSCONFDIR@/vigilo-vigiconf/prod/corrtrap /usr/bin/sec -intevents -conf=@SYSCONFDIR@/vigilo-vigiconf/prod/corrtrap/rules.sec -pid=/var/run/corrtrap/corrtrap.pid -syslog=local0 -debug=2 -detach' -u correl -w 1:1 -c 1:1
-command[check_procs_corrtrap2]=@LIBDIR@/nagios/plugins/check_procs -a 'snmptrapd -f -Lo -On -n -t -F %t %b %w %q %V,%v\n' -u root -w 1:1 -c 1:1
 command[check_swap]=@LIBDIR@/nagios/plugins/check_swap -w 99% -c 50%
 command[check_load]=@LIBDIR@/nagios/plugins/check_load -w 6,5,4 -c 7,6,5
 command[check_procs]=@LIBDIR@/nagios/plugins/check_procs -w 150 -c 200
@@ -38,5 +17,4 @@ command[check_cpu]=@LIBDIR@/nagios/plugins/check_cpu 25 40
 command[check_ipmi]=/usr/bin/sudo @LIBDIR@/nagios/plugins/check_ipmi
 command[check_raid]=@LIBDIR@/nagios/plugins/check_raid
 command[check_cpu_args]=@LIBDIR@/nagios/plugins/check_cpu $ARG1$ $ARG2$
-command[check_rrd]=@LIBDIR@/nagios/plugins/check_rrd $ARG1$ $ARG2$ $ARG3$ $ARG4$
 command[check_nagios]=@LIBDIR@/nagios/plugins/check_nagiostats_vigilo STATUSFILEAGETT,180,300 TOTCMDBUF USEDCMDBUF NUMHOSTS NUMHSTUP NUMHSTDOWN NUMHSTUNR NUMSERVICES NUMSVCOK NUMSVCWARN NUMSVCUNKN NUMSVCCRIT AVGACTSVCLAT,30000,180000 AVGACTSVCEXT AVGPSVSVCLAT AVGACTHSTLAT AVGACTHSTEXT AVGPSVHSTLAT NUMHSTACTCHK1M NUMHSTACTCHK5M NUMHSTSCHEDULED NUMSVCACTCHK1M NUMSVCACTCHK5M NUMSVCSCHEDULED NUMSACTHSTCHECKS5M NUMOACTHSTCHECKS5M NUMCACHEDHSTCHECKS5M NUMACTHSTCHECKS5M NUMSACTSVCCHECKS5M NUMOACTSVCCHECKS5M NUMCACHEDSVCCHECKS5M NUMACTSVCCHECKS5M

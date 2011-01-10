@@ -37,7 +37,6 @@ Requires:   vigilo-nagios-plugins-megaraid
 Requires:   vigilo-nagios-plugins-ospf
 Requires:   vigilo-nagios-plugins-ospf2
 Requires:   vigilo-nagios-plugins-raid
-Requires:   vigilo-nagios-plugins-rrd
 Requires:   vigilo-nagios-plugins-sysuptime
 Requires:   vigilo-nagios-plugins-tape
 Requires:   vigilo-nagios-plugins-udp_simple
@@ -142,14 +141,6 @@ Requires:   sudo
 
 %description raid
 Additionnal Nagios plugin for software RAID on Linux.
-This application is part of the Vigilo Project <http://vigilo-project.org>
-
-%package    rrd
-Summary:    Additionnal plugins for Nagios: RRD databases
-Group:      System/Servers
-
-%description rrd
-Additionnal Nagios plugin for RRD databases.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    sysuptime
@@ -295,11 +286,6 @@ rm -rf $RPM_BUILD_ROOT
 %files raid
 %defattr(644,root,root,755)
 %attr(755,root,root) %_libdir/nagios/plugins/check_raid
-
-%files rrd
-%defattr(644,root,root,755)
-%attr(755,root,root) %_libdir/nagios/plugins/check_rrd
-%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_rrd.cfg
 
 %files sysuptime
 %defattr(644,root,root,755)

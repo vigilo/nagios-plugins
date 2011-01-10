@@ -59,6 +59,7 @@ install_permissions:
 
 clean:
 	find $(CURDIR) -name "*~" -exec rm {} \;
+	rm -rf build
 	rm -f $(SUBSTFILES)
 
 SVN_REV = $(shell LANGUAGE=C LC_ALL=C svn info 2>/dev/null | awk '/^Revision:/ { print $$2 }')
