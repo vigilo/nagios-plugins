@@ -53,6 +53,15 @@ Additionnal plugins for the Nagios supervision system
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
 
+%package    -n vigilo-nagios-config
+Summary:    Nagios configuration for Vigilo
+Group:      System/Servers
+Requires:   nagios
+
+%description -n vigilo-nagios-config
+This contains the Vigilo configuration for Nagios.
+This package is part of the Vigilo Project <http://vigilo-project.org>
+
 %package    -n vigilo-nrpe-config
 Summary:    NRPE configuration for the Vigilo plugins
 Group:      System/Servers
@@ -230,9 +239,19 @@ make install \
 rm -rf $RPM_BUILD_ROOT
 
 
+%post -n vigilo-nrpe-config
+/sbin/service nrpe condrestart > /dev/null 2>&1 || :
+
+
 #%files
 #%defattr(644,root,root,755)
 #%doc COPYING
+
+%files -n vigilo-nagios-config
+%defattr(644,root,root,755)
+%doc COPYING
+%config(noreplace) %{_sysconfdir}/nagios/vigilo.cfg
+%config(noreplace) %{_sysconfdir}/nagios/objects/plugin-commands.cfg
 
 %files -n vigilo-nrpe-config
 %defattr(644,root,root,755)
