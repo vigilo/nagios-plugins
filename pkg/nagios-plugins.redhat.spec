@@ -2,7 +2,7 @@
 %define name    vigilo-%{module}
 %define version 1.7
 %define release 1%{?svn}%{?dist}
-%define nagios_plugins_cfg objects/
+%define nagios_plugins_cfg plugins.d/
 %define pyver 26
 %define pybasever 2.6
 %define __python /usr/bin/python%{pybasever}
@@ -251,7 +251,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYING
 %config(noreplace) %{_sysconfdir}/nagios/vigilo.cfg
-%config(noreplace) %{_sysconfdir}/nagios/objects/plugin-commands.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/plugin-commands.cfg
 
 %files -n vigilo-nrpe-config
 %defattr(644,root,root,755)

@@ -28,7 +28,7 @@ ifeq ($(DISTRO),debian)
 else ifeq ($(DISTRO),mandriva)
 	CONFDIR = $(SYSCONFDIR)/nagios/plugins.d
 else ifeq ($(DISTRO),redhat)
-	CONFDIR = $(SYSCONFDIR)/nagios/objects
+	CONFDIR = $(SYSCONFDIR)/nagios/plugins.d
 else
 	CONFDIR = $(SYSCONFDIR)/nagios/plugins.d
 endif
