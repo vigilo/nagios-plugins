@@ -190,6 +190,7 @@ Summary:    Additionnal plugins for Nagios: Dell hardware
 Group:      System/Servers
 Requires:   srvadmin-omacore
 Requires:   perl
+Requires:   sudo
 
 %description dell_openmanage
 Additionnal Nagios plugin for Dell hardware.
@@ -240,7 +241,7 @@ rm -rf $RPM_BUILD_ROOT
 #%%_post_service nrpe
 /sbin/service nrpe condrestart > /dev/null 2>&1 || :
 
-%post -n dell_openmanage
+%post dell_openmanage
 if ! grep -qs "^# NRPE Dell openmanage" /etc/sudoers; then
     echo "# NRPE Dell openmanage" >> /etc/sudoers
     echo "Cmnd_Alias CHECK_DELL_HARDWARE = \ " >> /etc/sudoers
