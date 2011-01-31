@@ -240,6 +240,18 @@ rm -rf $RPM_BUILD_ROOT
 #%%_post_service nrpe
 /sbin/service nrpe condrestart > /dev/null 2>&1 || :
 
+%post -n dell_openmanage
+if ! grep -qs "^# NRPE Dell openmanage" /etc/sudoers; then
+    echo "# NRPE Dell openmanage" >> /etc/sudoers
+    echo "Cmnd_Alias CHECK_DELL_HARDWARE = \ " >> /etc/sudoers
+    echo "    /usr/lib64/nagios/plugins/check_dell_openmanage_raid.pl, \ " >> /etc/sudoers
+    echo "    /usr/lib64/nagios/plugins/check_dell_openmanage_chassis.pl, \ " >> /etc/sudoers
+    echo "    /usr/lib64/nagios/plugins/check_dell_openmanage_fans.pl, \ " >> /etc/sudoers
+    echo "    /usr/lib64/nagios/plugins/check_dell_openmanage_general.pl, \ " >> /etc/sudoers
+    echo "    /usr/lib64/nagios/plugins/check_dell_openmanage_powersupplies.pl, \ " >> /etc/sudoers
+    echo "    /usr/lib64/nagios/plugins/check_dell_openmanage_temperature.pl" >> /etc/sudoers
+    echo "nagios ALL=(ALL) NOPASSWD: CHECK_DELL_HARDWARE" >> /etc/sudoers
+fi
 
 #%files
 #%defattr(644,root,root,755)
