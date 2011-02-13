@@ -214,6 +214,15 @@ Requires:   python
 Additionnal Nagios plugin to check the health of a Nagios server.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
+%package    rrdcached
+Summary:    Additionnal plugins for Nagios: RRDcached
+Group:      System/Servers
+Requires:   python
+
+%description rrdcached
+Additionnal Nagios plugin to check the RRDtool caching daemon.
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
 
 %prep
 %setup -q -n %{module}
@@ -349,6 +358,11 @@ fi
 %files nagios
 %defattr(644,root,root,755)
 %attr(755,root,root) %_libdir/nagios/plugins/check_nagiostats_vigilo
+
+%files rrdcached
+%defattr(644,root,root,755)
+%attr(755,root,root) %_libdir/nagios/plugins/check_rrdcached
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_rrdcached.cfg
 
 
 %changelog
