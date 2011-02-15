@@ -180,6 +180,7 @@ Summary:    Additionnal plugins for Nagios: tape backups
 Group:      System/Servers
 Requires:   smartmontools
 Requires:   mtx
+Requires:   sudo
 
 %description tape
 Additionnal Nagios plugin for tape backups.
@@ -250,8 +251,19 @@ rm -rf $RPM_BUILD_ROOT
 #%%_post_service nrpe
 /sbin/service nrpe condrestart > /dev/null 2>&1 || :
 
+%post tape
+if ! grep -qs "^# NRPE Tape" /etc/sudoers; then
+    echo "" >> /etc/sudoers
+    echo "# NRPE Tape" >> /etc/sudoers
+    echo "Cmnd_Alias CHECK_TAPE = \ " >> /etc/sudoers
+    echo "    /usr/lib64/nagios/plugins/check_tape" >> /etc/sudoers
+    echo "nagios ALL=(ALL) NOPASSWD: CHECK_TAPE" >> /etc/sudoers
+fi
+
+
 %post dell_openmanage
 if ! grep -qs "^# NRPE Dell openmanage" /etc/sudoers; then
+    echo "" >> /etc/sudoers
     echo "# NRPE Dell openmanage" >> /etc/sudoers
     echo "Cmnd_Alias CHECK_DELL_HARDWARE = \ " >> /etc/sudoers
     echo "    /usr/lib64/nagios/plugins/check_dell_openmanage_raid.pl, \ " >> /etc/sudoers

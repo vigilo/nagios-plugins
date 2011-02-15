@@ -25,3 +25,5 @@ command[check_dell_general]=/usr/bin/sudo @LIBDIR@/nagios/plugins/check_dell_ope
 command[check_dell_powersupplies]=/usr/bin/sudo @LIBDIR@/nagios/plugins/check_dell_openmanage_powersupplies.pl
 command[check_dell_raid]=/usr/bin/sudo @LIBDIR@/nagios/plugins/check_dell_openmanage_raid.pl
 command[check_dell_temperature]=/usr/bin/sudo @LIBDIR@/nagios/plugins/check_dell_openmanage_temperature.pl
+command[check_tape_drive]=/usr/bin/sudo @LIBDIR@/nagios/plugins/check_tape --tape /dev/tapedrive
+command[check_tape_changer]=/usr/bin/sudo @LIBDIR@/nagios/plugins/check_tape --tape /dev/tapedrive --medium-changer /dev/changer
