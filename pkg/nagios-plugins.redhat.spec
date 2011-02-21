@@ -1,7 +1,7 @@
 %define module  nagios-plugins
 %define name    vigilo-%{module}
 %define version 1.7
-%define release 1%{?svn}%{?dist}
+%define release 2%{?svn}%{?dist}
 %define nagios_plugins_cfg plugins.d/
 %define pyver 26
 %define pybasever 2.6
@@ -36,10 +36,12 @@ Requires:   vigilo-nagios-plugins-ipmi
 Requires:   vigilo-nagios-plugins-megaraid
 Requires:   vigilo-nagios-plugins-ospf
 Requires:   vigilo-nagios-plugins-ospf2
+Requires:   vigilo-nagios-plugins-postgres
 Requires:   vigilo-nagios-plugins-raid
 Requires:   vigilo-nagios-plugins-sysuptime
 Requires:   vigilo-nagios-plugins-tape
 Requires:   vigilo-nagios-plugins-udp_simple
+Requires:   vigilo-nagios-plugins-vigiloservers
 Requires:   vigilo-nagios-plugins-win_procs
 
 # Rename from nagios-plugins-vigilo
@@ -227,6 +229,24 @@ Requires:   python
 Additionnal Nagios plugin to check the RRDtool caching daemon.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
+%package    postgres
+Summary:    Additionnal plugins for Nagios: PostgreSQL
+Group:      System/Servers
+Requires:   python
+
+%description postgres
+Additionnal Nagios plugin to check a PostgreSQL database.
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
+%package    vigiloservers
+Summary:    Additionnal plugins for Nagios: Vigilo servers
+Group:      System/Servers
+Requires:   python
+
+%description vigiloservers
+Additionnal Nagios plugin to check whether a manual VigiConf redeployment is needed or not.
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
 
 %prep
 %setup -q -n %{module}
@@ -379,8 +399,20 @@ fi
 %attr(755,root,root) %_libdir/nagios/plugins/check_rrdcached
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_rrdcached.cfg
 
+%files postgres
+%defattr(644,root,root,755)
+%attr(755,root,root) %_libdir/nagios/plugins/check_postgres
+
+%files vigiloservers
+%defattr(644,root,root,755)
+%attr(755,root,root) %_libdir/nagios/plugins/check_vigiloservers
+
 
 %changelog
+* Mon Feb 21 2011 Vincent QUEMENER <vincent.quemener@c-s.fr>
+- added a plugin to check PostgreSQL databases ;
+- added a plugin to check whether a manual VigiConf redeployment is necessary or not.
+
 * Mon Nov 08 2010  BURGUIERE Thomas <thomas.burguiere@c-s.fr>
 - make vigilo-nagios-plugins a meta package
 
