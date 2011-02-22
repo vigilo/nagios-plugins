@@ -306,6 +306,8 @@ fi
 %doc COPYING
 %config(noreplace) %{_sysconfdir}/nagios/vigilo.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/vigilo-commands.cfg
+# Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/nagios-plugin-commands.cfg
 
 %files -n vigilo-nrpe-config
 %defattr(644,root,root,755)
