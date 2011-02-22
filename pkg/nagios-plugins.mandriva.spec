@@ -303,7 +303,7 @@ fi
 %defattr(644,root,root,755)
 %doc COPYING
 %config(noreplace) %{_sysconfdir}/nagios/vigilo.cfg
-%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/nagios-plugin-commands.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/vigilo-commands.cfg
 
 %files -n vigilo-nrpe-config
 %defattr(644,root,root,755)

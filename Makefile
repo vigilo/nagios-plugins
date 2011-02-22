@@ -55,7 +55,7 @@ install_files: $(SUBSTFILES)
 	mkdir -p $(DESTDIR)$(SYSCONFDIR)/nrpe.d/
 	install -p -m 644 nrpe.cfg $(DESTDIR)$(SYSCONFDIR)/nrpe.d/vigilo.cfg
 	install -p -m 644 vigilo.cfg $(DESTDIR)$(SYSCONFDIR)/nagios/vigilo.cfg
-	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(SYSCONFDIR)/nagios/plugins.d/nagios-plugin-commands.cfg
+	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(SYSCONFDIR)/nagios/plugins.d/vigilo-commands.cfg
 ifeq ($(DISTRO),redhat)
     # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(CONFDIR)/nagios-plugin-commands.cfg
