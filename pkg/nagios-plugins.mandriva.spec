@@ -229,7 +229,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 %package    postgres
 Summary:    Additionnal plugins for Nagios: PostgreSQL
 Group:      System/Servers
-Requires:   python
+Requires:   perl
 
 %description postgres
 Additionnal Nagios plugin to check a PostgreSQL database.
@@ -238,7 +238,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 %package    vigiloservers
 Summary:    Additionnal plugins for Nagios: Vigilo servers
 Group:      System/Servers
-Requires:   python
+Requires:   vigilo-nagios-plugins-postgres
 
 %description vigiloservers
 Additionnal Nagios plugin to check whether a manual VigiConf redeployment is needed or not.
@@ -400,10 +400,12 @@ fi
 %files postgres
 %defattr(644,root,root,755)
 %attr(755,root,root) %_libdir/nagios/plugins/check_postgres
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_postgres.cfg
 
 %files vigiloservers
 %defattr(644,root,root,755)
 %attr(755,root,root) %_libdir/nagios/plugins/check_vigiloservers
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_vigiloservers.cfg
 
 
 %changelog
