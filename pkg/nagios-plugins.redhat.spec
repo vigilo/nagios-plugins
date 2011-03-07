@@ -59,6 +59,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 Summary:    Nagios configuration for Vigilo
 Group:      System/Servers
 Requires:   nagios
+Requires:   socat
 
 %description -n vigilo-nagios-config
 This contains the Vigilo configuration for Nagios.
