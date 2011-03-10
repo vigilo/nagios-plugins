@@ -234,6 +234,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 Summary:    Additionnal plugins for Nagios: PostgreSQL
 Group:      System/Servers
 Requires:   perl
+Requires:   postgresql
 
 %description postgres
 Additionnal Nagios plugin to check a PostgreSQL database.
