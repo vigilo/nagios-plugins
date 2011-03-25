@@ -16,7 +16,7 @@ URL:        http://www.projet-vigilo.org
 Group:      System/Servers
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-build
 License:    GPLv2
-Buildarch:  noarch
+#Buildarch:  noarch  # On installe dans _libdir
 ###############################
 #Requires:   net-snmp-utils
 Requires:   sudo
