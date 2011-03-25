@@ -58,7 +58,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 %package    -n vigilo-nagios-config
 Summary:    Nagios configuration for Vigilo
 Group:      System/Servers
-Requires:   nagios
+Requires:   nagios >= 3
 Requires:   socat
 
 %description -n vigilo-nagios-config
