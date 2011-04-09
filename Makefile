@@ -1,6 +1,7 @@
 NAME = nagios-plugins
 LIBDIR = $(PREFIX)/lib
 PLUGINDIR = $(LIBDIR)/nagios/plugins
+VIGILOCONFDIR = $(SYSCONFDIR)/nagios/vigilo.d
 
 SUBSTFILES = \
 	$(basename $(wildcard conf/*.in)) \
@@ -24,13 +25,13 @@ DISTRO := $(shell $(find-distro))
 DIST_TAG = $(DISTRO)
 
 ifeq ($(DISTRO),debian)
-	CONFDIR = $(SYSCONFDIR)/nagios-plugins/config
+	NPCONFDIR = $(SYSCONFDIR)/nagios-plugins/config
 else ifeq ($(DISTRO),mandriva)
-	CONFDIR = $(SYSCONFDIR)/nagios/plugins.d
+	NPCONFDIR = $(SYSCONFDIR)/nagios/plugins.d
 else ifeq ($(DISTRO),redhat)
-	CONFDIR = $(SYSCONFDIR)/nagios/plugins.d
+	NPCONFDIR = $(SYSCONFDIR)/nagios/plugins.d
 else
-	CONFDIR = $(SYSCONFDIR)/nagios/plugins.d
+	NPCONFDIR = $(SYSCONFDIR)/nagios/plugins.d
 endif
 
 conf/%: conf/%.in
@@ -50,15 +51,16 @@ install_files: $(SUBSTFILES)
 	mkdir -p $(DESTDIR)$(PLUGINDIR)/;
 	install -p -m 755 plugins/check_* $(DESTDIR)$(PLUGINDIR)/;
 	rm -f $(DESTDIR)$(PLUGINDIR)/*.in
-	mkdir -p $(DESTDIR)$(CONFDIR)/
-	cp -p conf/*.cfg $(DESTDIR)$(CONFDIR)/
+	mkdir -p $(DESTDIR)$(NPCONFDIR)/
+	cp -p conf/*.cfg $(DESTDIR)$(NPCONFDIR)/
 	mkdir -p $(DESTDIR)$(SYSCONFDIR)/nrpe.d/
+	mkdir -p $(DESTDIR)$(VIGILOCONFDIR)/
 	install -p -m 644 nrpe.cfg $(DESTDIR)$(SYSCONFDIR)/nrpe.d/vigilo.cfg
-	install -p -m 644 vigilo.cfg $(DESTDIR)$(SYSCONFDIR)/nagios/vigilo.cfg
-	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(SYSCONFDIR)/nagios/plugins.d/vigilo-commands.cfg
+	install -p -m 644 vigilo.cfg $(DESTDIR)$(VIGILOCONFDIR)/vigilo.cfg
+	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(NPCONFDIR)/vigilo-commands.cfg
 ifeq ($(DISTRO),redhat)
     # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
-	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(CONFDIR)/nagios-plugin-commands.cfg
+	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(NPCONFDIR)/nagios-plugin-commands.cfg
 endif
 
 install_permissions:
