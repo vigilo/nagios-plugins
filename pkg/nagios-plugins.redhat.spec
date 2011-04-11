@@ -1,6 +1,6 @@
 %define module  nagios-plugins
 %define name    vigilo-%{module}
-%define version 1.8
+%define version @VERSION@
 %define release 1%{?svn}%{?dist}
 %define nagios_plugins_cfg plugins.d/
 
@@ -8,7 +8,7 @@ Name:       %{name}
 Summary:    Additional Nagios plugins
 Version:    %{version}
 Release:    %{release}
-Source0:    %{module}.tar.bz2
+Source0:    %{name}-%{version}.tar.gz
 URL:        http://www.projet-vigilo.org
 Group:      System/Servers
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-build
@@ -113,7 +113,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 
 %prep
-%setup -q -n %{module}
+%setup -q
 
 %build
 

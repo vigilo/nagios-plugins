@@ -1,7 +1,11 @@
 NAME = nagios-plugins
+PKGNAME = vigilo-$(NAME)
 LIBDIR = $(PREFIX)/lib
 PLUGINDIR = $(LIBDIR)/nagios/plugins
 VIGILOCONFDIR = $(SYSCONFDIR)/nagios/vigilo.d
+DESTDIR =
+
+VERSION := $(shell cat VERSION.txt)
 
 SUBSTFILES = \
 	$(basename $(wildcard conf/*.in)) \
@@ -70,13 +74,19 @@ clean:
 	rm -rf build
 	rm -f $(SUBSTFILES)
 
+sdist: dist/$(PKGNAME)-$(VERSION).tar.gz
+dist/$(PKGNAME)-$(VERSION).tar.gz:
+	mkdir -p build/sdist/$(PKGNAME)-$(VERSION)
+	rsync -a --exclude .svn --exclude /dist --exclude /build --delete ./ build/sdist/$(PKGNAME)-$(VERSION)
+	mkdir -p dist
+	cd build/sdist; tar -czf $(CURDIR)/dist/$(PKGNAME)-$(VERSION).tar.gz $(PKGNAME)-$(VERSION)
+
 SVN_REV = $(shell LANGUAGE=C LC_ALL=C svn info 2>/dev/null | awk '/^Revision:/ { print $$2 }')
-rpm: clean pkg/$(NAME).$(DISTRO).spec
-	mkdir -p build/$(NAME)
-	rsync -a --exclude .svn --delete ./ build/$(NAME)
+rpm: clean pkg/$(NAME).$(DISTRO).spec dist/$(PKGNAME)-$(VERSION).tar.gz
 	mkdir -p build/rpm/{$(NAME),BUILD,TMP}
-	cd build; tar -cjf rpm/$(NAME)/$(NAME).tar.bz2 $(NAME)
-	cp pkg/$(NAME).$(DISTRO).spec build/rpm/$(NAME)/vigilo-$(NAME).spec
+	mv dist/$(PKGNAME)-$(VERSION).tar.gz build/rpm/$(NAME)/
+	sed -e 's/@VERSION@/'`cat VERSION.txt`'/g' pkg/$(NAME).$(DISTRO).spec \
+		> build/rpm/$(NAME)/$(PKGNAME).spec
 	rpmbuild -ba --define "_topdir $(CURDIR)/build/rpm" \
 				 --define "_sourcedir %{_topdir}/$(NAME)" \
 				 --define "_specdir %{_topdir}/$(NAME)" \
@@ -87,9 +97,9 @@ rpm: clean pkg/$(NAME).$(DISTRO).spec
 				 --define "svn .svn$(SVN_REV)" \
 				 --define "dist .$(DIST_TAG)" \
 				 $(RPMBUILD_OPTS) \
-				 build/rpm/$(NAME)/vigilo-$(NAME).spec
+				 build/rpm/$(NAME)/$(PKGNAME).spec
 	mkdir -p dist
 	find build/rpm/$(NAME) -type f -name "*.rpm" | xargs cp -a -f -t dist/
 
 
-.PHONY: all install install_users install_files install_permissions clean rpm
+.PHONY: all install install_users install_files install_permissions clean rpm sdist
