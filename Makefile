@@ -47,11 +47,8 @@ plugins/%: plugins/%.in
 nrpe.cfg: nrpe.cfg.in
 	sed -e 's,@LIBDIR@,$(LIBDIR),g;s,@BINDIR@,$(BINDIR),g;s,@SYSCONFDIR@,$(SYSCONFDIR),g' nrpe.cfg.in > nrpe.cfg
 
-install: install_files install_users install_permissions
 
-install_users:
-
-install_files: $(SUBSTFILES)
+install: $(SUBSTFILES)
 	mkdir -p $(DESTDIR)$(PLUGINDIR)/;
 	install -p -m 755 plugins/check_* $(DESTDIR)$(PLUGINDIR)/;
 	rm -f $(DESTDIR)$(PLUGINDIR)/*.in
@@ -67,7 +64,6 @@ ifeq ($(DISTRO),redhat)
 	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(NPCONFDIR)/nagios-plugin-commands.cfg
 endif
 
-install_permissions:
 
 clean:
 	find $(CURDIR) -name "*~" -exec rm {} \;
@@ -102,4 +98,4 @@ rpm: clean pkg/$(NAME).$(DISTRO).spec dist/$(PKGNAME)-$(VERSION).tar.gz
 	find build/rpm/$(NAME) -type f -name "*.rpm" | xargs cp -a -f -t dist/
 
 
-.PHONY: all install install_users install_files install_permissions clean rpm sdist
+.PHONY: all install clean rpm sdist
