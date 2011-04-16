@@ -143,14 +143,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n vigilo-nagios-config
 %defattr(644,root,root,755)
-%doc COPYING
+%doc COPYING.txt README.txt
 %dir %{_sysconfdir}/nagios/vigilo.d
 %config(noreplace) %{_sysconfdir}/nagios/vigilo.d/vigilo.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/vigilo-commands.cfg
 
 %files -n vigilo-nrpe-config
 %defattr(644,root,root,755)
-%doc COPYING
+%doc COPYING.txt README.txt
 %config(noreplace) %{_sysconfdir}/nrpe.d/*.cfg
 
 %files cpu
