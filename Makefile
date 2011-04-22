@@ -1,5 +1,6 @@
 NAME = nagios-plugins
 PKGNAME = vigilo-$(NAME)
+SYSCONFDIR = /etc
 LIBDIR = $(PREFIX)/lib
 PLUGINDIR = $(LIBDIR)/nagios/plugins
 VIGILOCONFDIR = $(SYSCONFDIR)/nagios/vigilo.d
