@@ -60,7 +60,7 @@ install: $(SUBSTFILES)
 	install -p -m 644 vigilo.cfg $(DESTDIR)$(VIGILOCONFDIR)/vigilo.cfg
 	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(NPCONFDIR)/vigilo-commands.cfg
 ifeq ($(DISTRO),redhat)
-    # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
+	# Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(NPCONFDIR)/nagios-plugin-commands.cfg
 endif
 
