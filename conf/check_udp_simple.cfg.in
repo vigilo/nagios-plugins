@@ -1,4 +1,4 @@
 define command{
         command_name    check_udp_simple
-        command_line    @LIBDIR@/nagios/plugins/check_udp_simple -H $HOSTADDRESS$ -p $ARG1$
+        command_line    @PLUGINDIR@/check_udp_simple -H $HOSTADDRESS$ -p $ARG1$
 }

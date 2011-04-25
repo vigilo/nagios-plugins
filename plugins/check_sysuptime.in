@@ -33,7 +33,7 @@
 
 use POSIX;
 use strict;
-use lib "@LIBDIR@/nagios/plugins" ;
+use lib "@PLUGINDIR@" ;
 use utils qw($TIMEOUT %ERRORS &print_revision &support);
 
 use Net::SNMP;

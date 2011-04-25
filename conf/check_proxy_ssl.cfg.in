@@ -1,4 +1,4 @@
 define command{
         command_name    check_proxy_ssl
-        command_line    @LIBDIR@/nagios/plugins/check_https_via_proxy $HOSTADDRESS$ $ARG1$ $ARG2$
+        command_line    @PLUGINDIR@/check_https_via_proxy $HOSTADDRESS$ $ARG1$ $ARG2$
 }

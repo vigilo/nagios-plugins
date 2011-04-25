@@ -13,7 +13,7 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 REVISION=`echo '$Revision: 1.7 $' | sed -e 's/[^0-9.]//g'`
 
 #. $PROGPATH/utils.sh
-. @LIBDIR@/nagios/plugins/utils.sh
+. @PLUGINDIR@/utils.sh
 
 print_usage() {
     echo "Usage: $PROGNAME -F logfile -O oldlog -q query"

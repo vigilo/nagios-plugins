@@ -1,9 +1,10 @@
 NAME = nagios-plugins
 PKGNAME = vigilo-$(NAME)
 SYSCONFDIR = /etc
-LIBDIR = $(PREFIX)/lib
-PLUGINDIR = $(LIBDIR)/nagios/plugins
+LIBDIR = /usr/lib
+PLUGINDIR = /usr/lib$(if $(realpath /usr/lib64),64,)/nagios/plugins
 VIGILOCONFDIR = $(SYSCONFDIR)/nagios/vigilo.d
+PYTHON = /usr/bin/python
 DESTDIR =
 
 VERSION := $(shell cat VERSION.txt)
@@ -11,7 +12,7 @@ VERSION := $(shell cat VERSION.txt)
 SUBSTFILES = \
 	$(basename $(wildcard conf/*.in)) \
 	$(basename $(wildcard plugins/*.in)) \
-	nrpe.cfg
+	nrpe.cfg nagios-plugin-commands.cfg
 
 all: $(SUBSTFILES)
 
@@ -40,13 +41,13 @@ else
 endif
 
 conf/%: conf/%.in
-	sed -e 's,@LIBDIR@,$(LIBDIR),g' $^ > $@
+	sed -e 's,@PLUGINDIR@,$(PLUGINDIR),g' $^ > $@
 
 plugins/%: plugins/%.in
-	sed -e 's,@LIBDIR@,$(LIBDIR),g' -e 's,@PYTHON@,$(PYTHON),g' $^ > $@
+	sed -e 's,@PLUGINDIR@,$(PLUGINDIR),g' -e 's,@PYTHON@,$(PYTHON),g' $^ > $@
 
-nrpe.cfg: nrpe.cfg.in
-	sed -e 's,@LIBDIR@,$(LIBDIR),g;s,@BINDIR@,$(BINDIR),g;s,@SYSCONFDIR@,$(SYSCONFDIR),g' nrpe.cfg.in > nrpe.cfg
+%.cfg: %.cfg.in
+	sed -e 's,@PLUGINDIR@,$(PLUGINDIR),g;s,@BINDIR@,$(BINDIR),g;s,@SYSCONFDIR@,$(SYSCONFDIR),g' nrpe.cfg.in > nrpe.cfg
 
 
 install: $(SUBSTFILES)
