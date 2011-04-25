@@ -1,0 +1,9 @@
+nrpe.cfg
+plugins/check_sysuptime
+conf/check_cpu.cfg
+conf/check_ipmi.cfg
+conf/check_megaraid.cfg
+conf/check_proxy_ssl.cfg
+conf/check_udp_simple.cfg
+nagios-plugin-commands.cfg
+plugins/check_udp_simple

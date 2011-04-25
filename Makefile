@@ -47,7 +47,7 @@ plugins/%: plugins/%.in
 	sed -e 's,@PLUGINDIR@,$(PLUGINDIR),g' -e 's,@PYTHON@,$(PYTHON),g' $^ > $@
 
 %.cfg: %.cfg.in
-	sed -e 's,@PLUGINDIR@,$(PLUGINDIR),g;s,@BINDIR@,$(BINDIR),g;s,@SYSCONFDIR@,$(SYSCONFDIR),g' nrpe.cfg.in > nrpe.cfg
+	sed -e 's,@PLUGINDIR@,$(PLUGINDIR),g;s,@BINDIR@,$(BINDIR),g;s,@SYSCONFDIR@,$(SYSCONFDIR),g' $^ > $@
 
 
 install: $(SUBSTFILES)
