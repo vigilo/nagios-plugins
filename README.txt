@@ -27,8 +27,8 @@ L'installation se fait par la commande ``make install`` (à exécuter en
 
 Il faut ensuite ajouter la configuration spécifique de Vigilo dans Nagios,
 pour cela, editer le fichier `/etc/nagios/nagios.cfg` et supprimer ou
-commenter les lignes qui commencent par ``cfg_file``. Puis, ajouter les lignes
-suivantes ::
+commenter les lignes qui commencent par ``cfg_file`` ou ``cfg_dir``. Puis,
+ajouter les lignes suivantes ::
 
     # Command definitions for Nagios plugins
     cfg_dir=/etc/nagios/plugins.d/
@@ -36,6 +36,11 @@ suivantes ::
     cfg_dir=/etc/nagios/vigilo.d/
     # Vigiconf-generated conf file
     cfg_dir=/etc/vigilo/vigiconf/prod/nagios
+
+Enfin, si vous désirez utiliser NRPE, veillez à ce que la ligne suivante soit
+présente dans ``/etc/nagios/nrpe.cfg``::
+
+    include_dir=/etc/nrpe.d/
 
 
 License
