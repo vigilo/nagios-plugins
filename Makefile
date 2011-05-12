@@ -63,7 +63,7 @@ install: $(SUBSTFILES)
 	install -p -m 644 vigilo.cfg $(DESTDIR)$(VIGILOCONFDIR)/vigilo.cfg
 	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(NPCONFDIR)/vigilo-commands.cfg
 	mkdir -p $(DESTDIR)$(EVENTHANDLERDIR)/;
-	install -p -m 754 plugins/eventhandlers/service_notification_event $(DESTDIR)$(EVENTHANDLERDIR)/;
+	install -p -m 755 plugins/eventhandlers/service_notification_event $(DESTDIR)$(EVENTHANDLERDIR)/;
 ifeq ($(DISTRO),redhat)
 	# Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(NPCONFDIR)/nagios-plugin-commands.cfg
