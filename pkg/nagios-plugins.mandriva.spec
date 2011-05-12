@@ -22,6 +22,7 @@ Requires:   vigilo-nagios-plugins-megaraid
 Requires:   vigilo-nagios-plugins-raid
 Requires:   vigilo-nagios-plugins-sysuptime
 Requires:   vigilo-nagios-plugins-udp_simple
+Requires:   vigilo-nagios-plugins-service_notification_event
 
 
 %description
@@ -111,6 +112,16 @@ Requires:   nmap
 Additionnal Nagios plugins for UDP-based server.
 This application is part of the Vigilo Project <http://vigilo-project.org>
 
+%package    service_notification_event
+Summary:    Additionnal event handler for Nagios: Service notification
+Group:      System/Servers
+Requires:   sudo
+
+%description service_notification_event
+Additionnal Nagios event handler for service notification despite of the host
+is down.
+This application is part of the Vigilo Project <http://vigilo-project.org>
+
 
 %prep
 %setup -q
@@ -186,7 +197,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %_libdir/nagios/plugins/check_udp_simple
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_udp_simple.cfg
 
+%files service_notification_event
+%defattr(644,root,root,755)
+%attr(755,root,root) %_libdir/nagios/plugins/eventhandlers/service_notification_event
+
 
 %changelog
+* Tue May 10 2011 Rodrigue Nsiangani <rodrigue.nsiangani.ext@c-s.fr>
+- Add service_notification_event
 * Sat Apr 09 2011 Aurelien Bompard <aurelien.bompard@c-s.fr> 
 - initial package
