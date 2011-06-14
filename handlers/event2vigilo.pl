@@ -31,7 +31,7 @@ use POSIX;
 use strict;
 use IO::Socket::UNIX;
 
-my $debug = 1;
+my $debug = 0;
 
 my $help_msg = <<HELPMSG;
 Nagios notification script (send events to Vigilo)
