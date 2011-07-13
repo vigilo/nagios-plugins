@@ -1,13 +1,10 @@
 %define module  nagios-plugins
-%define name    vigilo-%{module}
-%define version @VERSION@
-%define release 1%{?dev}%{?dist}
 %define nagios_plugins_cfg plugins.d/
 
-Name:       %{name}
+Name:       vigilo-%{module}
 Summary:    Additional Nagios plugins
-Version:    %{version}
-Release:    %{release}
+Version:    @VERSION@
+Release:    @RELEASE@%{?dist}
 Source0:    %{name}-%{version}.tar.gz
 URL:        http://www.projet-vigilo.org
 Group:      System/Servers
