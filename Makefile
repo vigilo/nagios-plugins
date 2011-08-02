@@ -77,8 +77,8 @@ clean:
 	rm -f $(SUBSTFILES)
 
 
-GIT_CHSET = $(shell git rev-parse --short HEAD)
-GIT_CHSET_COUNT = $(shell git rev-list --no-merges --count HEAD)
+GIT_CHSET = $(shell git log -1 --format=format:%h .)
+GIT_CHSET_COUNT = $(shell git rev-list --no-merges --count $(GIT_CHSET))
 RELEASE_TAG = $(if $(RELEASE),1,0.$(GIT_CHSET_COUNT).g$(GIT_CHSET))
 
 sdist: dist/$(PKGNAME)-$(VERSION)$(if $(RELEASE),,.g$(GIT_CHSET)).tar.gz
