@@ -138,7 +138,7 @@ define command{
 # 'check-host-alive' command definition
 define command{
         command_name    check-host-alive
-        command_line    @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
+        command_line    @PLUGINDIR@/check_fping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -n 1
 }
 
 # 'check-printer-alive' command definition
