@@ -31,7 +31,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 Summary:    Nagios configuration for Vigilo
 Group:      System/Servers
 Requires:   nagios >= 3
-#Requires:   nagios-check_fping
+Requires:   nagios-check_fping
 
 %description -n vigilo-nagios-config
 This contains the Vigilo configuration for Nagios.
