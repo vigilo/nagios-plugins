@@ -25,8 +25,8 @@ plugins/%: plugins/%.in
 
 
 install: $(SUBSTFILES)
-	mkdir -p $(DESTDIR)$(NPLUGDIR)/;
-	install -p -m 755 plugins/check_* $(DESTDIR)$(NPLUGDIR)/;
+	mkdir -p $(DESTDIR)$(NPLUGDIR)/
+	install -p -m 755 plugins/check_* $(DESTDIR)$(NPLUGDIR)/
 	rm -f $(DESTDIR)$(NPLUGDIR)/*.in
 	mkdir -p $(DESTDIR)$(NPCONFDIR)/
 	cp -p conf/*.cfg $(DESTDIR)$(NPCONFDIR)/
@@ -35,8 +35,10 @@ install: $(SUBSTFILES)
 	install -p -m 644 nrpe.cfg $(DESTDIR)$(SYSCONFDIR)/nrpe.d/vigilo.cfg
 	install -p -m 644 vigilo.cfg $(DESTDIR)$(VIGILOCONFDIR)/vigilo.cfg
 	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(NPCONFDIR)/vigilo-commands.cfg
-	mkdir -p $(DESTDIR)$(NEHDIR)/;
-	install -p -m 755 handlers/*.pl $(DESTDIR)$(NEHDIR)/;
+	mkdir -p $(DESTDIR)$(NEHDIR)/
+	install -p -m 755 handlers/*.pl $(DESTDIR)$(NEHDIR)/
+	mkdir -p $(DESTDIR)/etc/cron.daily/
+	install -p -m 755 nagios-restart.sh $(DESTDIR)/etc/cron.daily/vigilo-nagios-restart.sh
 ifeq ($(DISTRO),redhat)
 	# Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(NPCONFDIR)/nagios-plugin-commands.cfg

@@ -144,6 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/nagios/vigilo.d/vigilo.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/vigilo-commands.cfg
 %attr(755,root,root) %{_libdir}/nagios/plugins/eventhandlers/event2vigilo.pl
+%attr(755,root,root) /etc/cron.daily/*.sh
 # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/nagios-plugin-commands.cfg
 
