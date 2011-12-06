@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/nagios/vigilo.d
 %config(noreplace) %{_sysconfdir}/nagios/vigilo.d/vigilo.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/vigilo-commands.cfg
-%attr(755,root,root) %{_libdir}/nagios/plugins/eventhandlers/event2vigilo.pl
+%attr(755,root,root) %{_libdir}/nagios/plugins/eventhandlers/nagios2vigilo.pl
 %attr(755,root,root) /etc/cron.daily/*.sh
 
 %files -n vigilo-nrpe-config
