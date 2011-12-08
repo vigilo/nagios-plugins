@@ -48,7 +48,6 @@ sub print_help () {
     print_usage();
 }
 
-my $opt_v = 0;
 my $opt_h = 0;
 my $debug = 0;
 my $event = 0;
@@ -57,26 +56,29 @@ my $connector_socket = "/var/lib/vigilo/connector-nagios/send.sock";
 
 Getopt::Long::Configure('bundling');
 GetOptions
-    ("v" => \$opt_v,  "version"  => \$opt_v,
-     "h" => \$opt_h,  "help"     => \$opt_h,
+    ("h" => \$opt_h,  "help"     => \$opt_h,
      "d" => \$debug,  "debug"    => \$debug,
      "e" => \$event,  "event"    => \$event,
      "s" => \$state,  "state"    => \$state,
      "S=s" => \$connector_socket, "socket=s" => \$connector_socket );
 
 my $nb_param = scalar @ARGV;
-my $message = "" ;
+my $message;
 
-if ( $event && $nb_param ne 5) {
+if ($opt_h) {
     print_help(); exit $ERRORS{'UNKNOWN'};
-}else{
-    $message = $message . "event" ;
 }
-if ( $state && $nb_param ne 8) {
-    print_help(); exit $ERRORS{'UNKNOWN'} ;
-}else{
-    $message = $message . "state" ;
+
+if ( $event && $nb_param eq 5) {
+    $message = "event";
+
+} elsif ( $state && $nb_param eq 8) {
+    $message = "state";
+
+} else {
+    print_help(); exit $ERRORS{'UNKNOWN'};
 }
+
 foreach my $arg ( @ARGV ) {
     $message = $message . "|" . $arg ;
 }
