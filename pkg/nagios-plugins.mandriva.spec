@@ -19,6 +19,8 @@ Requires:   vigilo-nagios-plugins-megaraid
 Requires:   vigilo-nagios-plugins-raid
 Requires:   vigilo-nagios-plugins-sysuptime
 Requires:   vigilo-nagios-plugins-udp_simple
+# sudo est requis par la tâche cron de redémarrage de Nagios
+Requires:   sudo
 
 
 %description
@@ -187,5 +189,5 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Sat Apr 09 2011 Aurelien Bompard <aurelien.bompard@c-s.fr> 
+* Sat Apr 09 2011 Aurelien Bompard <aurelien.bompard@c-s.fr>
 - initial package
