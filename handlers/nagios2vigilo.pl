@@ -37,8 +37,8 @@ sub print_usage () {
     print "Usage: nagios2vigilo [--state|--event] [--socket /patch/to/connector-nagios/send.sock] ARGS\n";
     print "       nagios2vigilo --state \$TIMET\$ \$HOSTNAME\$ \$HOSTADDRESS\$ \$SERVICEDESC\$ \$SERVICESTATEID\$ \$SERVICESTATETYPE\$ \$SERVICEATTEMPT\$ \$SERVICEOUTPUT\$\n";
     print "       nagios2vigilo --state \$TIMET\$ \$HOSTNAME\$ \$HOSTADDRESS\$ Host \$HOSTSTATEID\$ \$HOSTSTATETYPE\$ \$HOSTATTEMPT\$ \$HOSTOUTPUT\$\n";
-    print "       nagios2vigilo --event \$TIMET\$ \$HOSTNAME\$ \$SERVICEDESC\$ \$SERVICESTATE\$ \$SERVICEOUTPUT\$\n" ;
-    print "       nagios2vigilo --event \$TIMET\$ \$HOSTNAME\$ Host \$HOSTSTATE\$ \$HOSTOUTPUT\$\n" ;
+    print "       nagios2vigilo --event \$TIMET\$ \$HOSTNAME\$ \$SERVICEDESC\$ \$SERVICESTATE\$ \$SERVICEOUTPUT\$ \$SERVICESTATETYPE\$\n" ;
+    print "       nagios2vigilo --event \$TIMET\$ \$HOSTNAME\$ Host \$HOSTSTATE\$ \$HOSTOUTPUT\$ \$HOSTSTATETYPE\$\n" ;
 }
 
 sub print_help () {
@@ -69,8 +69,14 @@ if ($opt_h) {
     print_help(); exit $ERRORS{'UNKNOWN'};
 }
 
-if ( $event && $nb_param eq 5) {
+if ( $event && $nb_param eq 6) {
     $message = "event";
+    # Nagios peut envoyer une notification pour un SOFT state
+    # lorsqu'on force l'envoi d'une notification.
+    # On ne traite que les HARD states dans ce script.
+    if (lc(pop(@ARGV)) eq "soft") {
+        return;
+    }
 
 } elsif ( $state && $nb_param eq 8) {
     $message = "state";
