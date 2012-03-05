@@ -7,14 +7,18 @@
 
 /etc/init.d/nagios stop
 for i in `seq 20`; do
-    pgrep nagios >/dev/null || exit 0
+    pgrep -u nagios nagios >/dev/null || break
     sleep 1
 done
 
-# On compte ici sur le fait que l'utilisateur "nagios"
-# a des droits restreints et ne peut pas killer d'autres
-# processus sans rapport avec Nagios (et en particulier,
-# pas le script courant exécuté en tant que "root").
-sudo -u nagios pkill -u nagios -KILL nagios
+# S'il reste des processus Nagios en vie, on les tue.
+pgrep -u nagios nagios >/dev/null
+if [ $? -eq 0 ]; then
+    # On compte ici sur le fait que l'utilisateur "nagios"
+    # a des droits restreints et ne peut pas killer d'autres
+    # processus sans rapport avec Nagios (et en particulier,
+    # pas le script courant exécuté en tant que "root").
+    sudo -u nagios pkill -KILL -u nagios nagios
+fi
 
 /etc/init.d/nagios start
