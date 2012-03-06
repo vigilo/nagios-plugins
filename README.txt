@@ -37,6 +37,18 @@ ajouter les lignes suivantes ::
     # Vigiconf-generated conf file
     cfg_dir=/etc/vigilo/vigiconf/prod/nagios
 
+    #activation de la prise en charge des données de performance
+    process_performance_data=1
+    host_perfdata_command=process-host-perfdata
+    service_perfdata_command=process-service-perfdata
+    #activation de la vérification de la fraîcheur
+    check_host_freshness=1
+    #utilisation du format européen pour les dates
+    date_format=euro
+    #activation des installations de grande envergure
+    use_large_installation_tweaks=1
+
+
 Enfin, si vous désirez utiliser NRPE, veillez à ce que la ligne suivante soit
 présente dans ``/etc/nagios/nrpe.cfg``::
 
