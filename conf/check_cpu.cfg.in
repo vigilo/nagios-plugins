@@ -1,4 +1,4 @@
 define command{
         command_name    check_cpu
-        command_line    @PLUGINDIR@/check_cpu $ARG1$ $ARG2$
+        command_line    @PLUGINDIR@/check_cpu $ARG1$ $ARG2$ $ARG3$
 }

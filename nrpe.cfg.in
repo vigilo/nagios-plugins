@@ -12,4 +12,4 @@ command[check_procs]=@PLUGINDIR@/check_procs -w 150 -c 200
 command[check_cpu]=@PLUGINDIR@/check_cpu 25 40
 command[check_ipmi]=/usr/bin/sudo @PLUGINDIR@/check_ipmi
 command[check_raid]=@PLUGINDIR@/check_raid
-command[check_cpu_args]=@PLUGINDIR@/check_cpu $ARG1$ $ARG2$
+command[check_cpu_args]=@PLUGINDIR@/check_cpu $ARG1$ $ARG2$ $ARG3$
