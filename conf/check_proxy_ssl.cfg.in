@@ -1,4 +1,4 @@
 define command{
         command_name    check_proxy_ssl
-        command_line    @PLUGINDIR@/check_https_via_proxy $HOSTADDRESS$ $ARG1$ $ARG2$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_https_via_proxy $HOSTADDRESS$ $ARG1$ $ARG2$
 }

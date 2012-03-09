@@ -1,4 +1,4 @@
 define command{
         command_name    check_megaraid
-        command_line    /usr/bin/sudo @PLUGINDIR@/check_megaraid
+        command_line    LC_NUMERIC=C /usr/bin/sudo @PLUGINDIR@/check_megaraid
 }

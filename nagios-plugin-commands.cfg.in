@@ -1,19 +1,19 @@
 # 'check_disk' command definition
 define command{
         command_name    check_disk
-        command_line    @PLUGINDIR@/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$
 }
 
 # 'check_all_disks' command definition
 define command{
         command_name    check_all_disks
-        command_line    @PLUGINDIR@/check_disk -w $ARG1$ -c $ARG2$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_disk -w $ARG1$ -c $ARG2$
 }
 
 # 'ssh_disk' command definition
 define command{
         command_name    ssh_disk
-        command_line    @PLUGINDIR@/check_by_ssh -H $HOSTADDRESS$ -C '@PLUGINDIR@/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$'
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_by_ssh -H $HOSTADDRESS$ -C '@PLUGINDIR@/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$'
 }
 
 ####
@@ -22,43 +22,43 @@ define command{
 # 'ssh_disk_4' command definition
 define command{
         command_name    ssh_disk_4
-        command_line    @PLUGINDIR@/check_by_ssh -H $HOSTADDRESS$ -C '@PLUGINDIR@/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$' -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_by_ssh -H $HOSTADDRESS$ -C '@PLUGINDIR@/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$' -4
 }
 # $Id: check_http.cfg 148613 2008-01-11 17:59:43Z oden $
 # 'check_http' command definition
 define command{
         command_name    check_http
-        command_line    @PLUGINDIR@/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$
 }
 
 
 # 'check_http2' command definition
 define command{
         command_name    check_http2
-        command_line    @PLUGINDIR@/check_http -H $ARG1$ -I $HOSTADDRESS$ -w $ARG2$ -c $ARG3$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http -H $ARG1$ -I $HOSTADDRESS$ -w $ARG2$ -c $ARG3$
 }
 
 # 'check_squid' command definition
 define command{
         command_name    check_squid
-        command_line    @PLUGINDIR@/check_http -H $HOSTADDRESS$ -p $ARG1$  -u $ARG2$  -e 'HTTP/1.0 200 OK'
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http -H $HOSTADDRESS$ -p $ARG1$  -u $ARG2$  -e 'HTTP/1.0 200 OK'
 }
 
 # 'check_https' command definition
 define command{
         command_name    check_https
-        command_line    @PLUGINDIR@/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$
 }
 
 # 'check_https_auth' command definition
 define command{
         command_name    check_https_auth
-        command_line    @PLUGINDIR@/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$ -a $ARG1$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$ -a $ARG1$
 }
 # 'check_cups' command definition
 define command{
         command_name    check_cups
-        command_line    @PLUGINDIR@/check_http -H $HOSTADDRESS$ -p 631
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http -H $HOSTADDRESS$ -p 631
 }
 
 ####
@@ -67,96 +67,96 @@ define command{
 # 'check_http_4' command definition
 define command{
         command_name    check_http_4
-        command_line    @PLUGINDIR@/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$ -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http -H $HOSTADDRESS$ -I $HOSTADDRESS$ -4
 }
 
 # 'check_http2_4' command definition
 define command{
         command_name    check_http2_4
-        command_line    @PLUGINDIR@/check_http -H $ARG1$ -I $HOSTADDRESS$ -w $ARG2$ -c $ARG3$ -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http -H $ARG1$ -I $HOSTADDRESS$ -w $ARG2$ -c $ARG3$ -4
 }
 
 # 'check_squid_4' command definition
 define command{
         command_name    check_squid_4
-        command_line    @PLUGINDIR@/check_http -H $HOSTADDRESS$ -p $ARG1$  -u $ARG2$  -e 'HTTP/1.0 200 OK' -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http -H $HOSTADDRESS$ -p $ARG1$  -u $ARG2$  -e 'HTTP/1.0 200 OK' -4
 }
 
 # 'check_https_4' command definition
 define command{
         command_name    check_https_4
-        command_line    @PLUGINDIR@/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$ -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$ -4
 }
 
 # 'check_https_auth_4' command definition
 define command{
         command_name    check_https_auth_4
-        command_line    @PLUGINDIR@/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$ -a $ARG1$ -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http --ssl -H $HOSTADDRESS$ -I $HOSTADDRESS$ -a $ARG1$ -4
 }
 
 # 'check_cups_4' command definition
 define command{
         command_name    check_cups_4
-        command_line    @PLUGINDIR@/check_http -H $HOSTADDRESS$ -p 631 -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_http -H $HOSTADDRESS$ -p 631 -4
 }
 
 # 'check_load' command definition
 define command{
         command_name    check_load
-        command_line    @PLUGINDIR@/check_load --warning=$ARG1$,$ARG2$,$ARG3$ --critical=$ARG4$,$ARG5$,$ARG6$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_load --warning=$ARG1$,$ARG2$,$ARG3$ --critical=$ARG4$,$ARG5$,$ARG6$
 }
 # this command runs a program $ARG1$ with arguments $ARG2$
 define command {
         command_name    check_nrpe
-        command_line    @PLUGINDIR@/check_nrpe -H $HOSTADDRESS$ -c $ARG1$ -a $ARG2$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_nrpe -H $HOSTADDRESS$ -c $ARG1$ -a $ARG2$
 }
 
 # this command runs a program $ARG1$ with no arguments
 define command {
         command_name    check_nrpe_1arg
-        command_line    @PLUGINDIR@/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
 }
 
 # 'check_ntp_time' command definition
 define command{
         command_name    check_ntp_time
-        command_line    @PLUGINDIR@/check_ntp_time -H $HOSTADDRESS$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ntp_time -H $HOSTADDRESS$
 }
 
 # 'check_ntp_ntpq' command definition
 define command{
         command_name    check_ntp_ntpq
-        command_line    @PLUGINDIR@/check_ntp_peer -H $HOSTADDRESS$ -j 10 -k 15
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ntp_peer -H $HOSTADDRESS$ -j 10 -k 15
 }
 # $Id: check_ping.cfg 148613 2008-01-11 17:59:43Z oden $
 # 'check_ping' command definition
 define command{
         command_name    check_ping
-        command_line    @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
 }
 
 # 'check-host-alive' command definition
 define command{
         command_name    check-host-alive
-        command_line    @PLUGINDIR@/check_fping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -n 1
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_fping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -n 1
 }
 
 # 'check-printer-alive' command definition
 define command{
         command_name    check-printer-alive
-        command_line    @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
 }
 
 # 'check-switch-alive' command definition
 define command{
         command_name    check-switch-alive
-        command_line    @PLUGINDIR@/check_ping $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
 }
 
 # 'check-router-alive' command definition
 define command{
         command_name    check-router-alive
-        command_line    @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
 }
 
 ####
@@ -165,83 +165,82 @@ define command{
 # 'check_ping_4' command definition
 define command{
         command_name    check_ping_4
-        command_line    @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -4
 }
 
 # 'check-host-alive_4' command definition
 define command{
         command_name    check-host-alive_4
-        command_line    @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
 }
 
 # 'check-printer-alive_4' command definition
 define command{
         command_name    check-printer-alive_4
-        command_line    @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
 }
 
 # 'check-switch-alive_4' command definition
 define command{
         command_name    check-switch-alive_4
-        command_line    @PLUGINDIR@/check_ping $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
 }
 
 # 'check-router-alive_4' command definition
 define command{
         command_name    check-router-alive_4
-        command_line    @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
 }
 
 # 'check_procs' command definition
 define command{
         command_name    check_procs
-        command_line    @PLUGINDIR@/check_procs -w $ARG1$ -c $ARG2$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_procs -w $ARG1$ -c $ARG2$
 }
 
 # 'check_procs_zombie' command definition
 define command{
         command_name    check_procs_zombie
-        command_line    @PLUGINDIR@/check_procs -w $ARG1$ -c $ARG2$ -s Z
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_procs -w $ARG1$ -c $ARG2$ -s Z
 }
 
 # 'check_procs_httpd' command definition
 define command{
         command_name    check_procs_httpd
-        command_line    @PLUGINDIR@/check_procs -w 5:$ARG1$ -c 1:$ARG2$ -C httpd
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_procs -w 5:$ARG1$ -c 1:$ARG2$ -C httpd
 }
 
 # 'check_procs_vsz' command definition
 define command{
         command_name    check_procs_vsz
-        command_line    @PLUGINDIR@/check_procs -w 8096 -c 16182 -C httpd --metric VSZ
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_procs -w 8096 -c 16182 -C httpd --metric VSZ
 }
 
 # 'check_ssh' command definition
 define command{
         command_name    check_ssh
-        command_line    @PLUGINDIR@/check_ssh $HOSTADDRESS$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ssh $HOSTADDRESS$
 }
 
 # use these checks, if you want to test IPv4 connectivity on IPv6 enabled systems
 # 'check_ssh_4' command definition
 define command{
         command_name    check_ssh_4
-        command_line    @PLUGINDIR@/check_ssh $HOSTADDRESS$ -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ssh $HOSTADDRESS$ -4
 }
 
 # 'check_swap' command definition
 define command{
         command_name    check_swap
-        command_line    @PLUGINDIR@/check_swap -av -w $ARG1$ -c $ARG2$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_swap -av -w $ARG1$ -c $ARG2$
 }
 
 # 'check_users' command definition
 define command{
         command_name    check_users
-        command_line    @PLUGINDIR@/check_users -w $ARG1$ -c $ARG2$
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_users -w $ARG1$ -c $ARG2$
 }
 define command {
         command_name    nrpe_check_control
-        command_line    @PLUGINDIR@/nrpe_check_control $SERVICESTATE$ $SERVICESTATETYPE$ $SERVICEATTEMPT$ "$HOSTNAME$"
+        command_line    LC_NUMERIC=C @PLUGINDIR@/nrpe_check_control $SERVICESTATE$ $SERVICESTATETYPE$ $SERVICEATTEMPT$ "$HOSTNAME$"
 }
-
