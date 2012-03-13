@@ -156,34 +156,41 @@ rm -rf $RPM_BUILD_ROOT
 
 %files cpu
 %defattr(644,root,root,755)
+%doc COPYING.txt README.txt
 %attr(755,root,root) %_libdir/nagios/plugins/check_cpu
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_cpu.cfg
 
 %files https_via_proxy
 %defattr(644,root,root,755)
+%doc COPYING.txt README.txt
 %attr(755,root,root) %_libdir/nagios/plugins/check_https_via_proxy
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_proxy_ssl.cfg
 
 %files ipmi
 %defattr(644,root,root,755)
+%doc COPYING.txt README.txt
 %attr(755,root,root) %_libdir/nagios/plugins/check_ipmi
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_ipmi.cfg
 
 %files megaraid
 %defattr(644,root,root,755)
+%doc COPYING.txt README.txt
 %attr(755,root,root) %_libdir/nagios/plugins/check_megaraid
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_megaraid.cfg
 
 %files raid
 %defattr(644,root,root,755)
+%doc COPYING.txt README.txt
 %attr(755,root,root) %_libdir/nagios/plugins/check_raid
 
 %files sysuptime
 %defattr(644,root,root,755)
+%doc COPYING.txt README.txt
 %attr(755,root,root) %_libdir/nagios/plugins/check_sysuptime
 
 %files udp_simple
 %defattr(644,root,root,755)
+%doc COPYING.txt README.txt
 %attr(755,root,root) %_libdir/nagios/plugins/check_udp_simple
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_udp_simple.cfg
 
