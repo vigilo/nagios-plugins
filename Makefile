@@ -45,9 +45,7 @@ ifeq ($(DISTRO),redhat)
 endif
 
 
-clean:
-	find $(CURDIR) -name "*~" -exec rm {} \;
-	rm -rf build
+clean: clean_common
 	rm -f $(SUBSTFILES)
 
 
