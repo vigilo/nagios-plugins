@@ -36,9 +36,9 @@ use IO::Socket::UNIX;
 sub print_usage () {
     print "Usage: nagios2vigilo [--state|--event] [--socket /patch/to/connector-nagios/send.sock] ARGS\n";
     print "       nagios2vigilo --state \$TIMET\$ \$HOSTNAME\$ \$HOSTADDRESS\$ \$SERVICEDESC\$ \$SERVICESTATEID\$ \$SERVICESTATETYPE\$ \$SERVICEATTEMPT\$ \$SERVICEOUTPUT\$\n";
-    print "       nagios2vigilo --state \$TIMET\$ \$HOSTNAME\$ \$HOSTADDRESS\$ Host \$HOSTSTATEID\$ \$HOSTSTATETYPE\$ \$HOSTATTEMPT\$ \$HOSTOUTPUT\$\n";
+    print "       nagios2vigilo --state \$TIMET\$ \$HOSTNAME\$ \$HOSTADDRESS\$ '' \$HOSTSTATEID\$ \$HOSTSTATETYPE\$ \$HOSTATTEMPT\$ \$HOSTOUTPUT\$\n";
     print "       nagios2vigilo --event \$TIMET\$ \$HOSTNAME\$ \$SERVICEDESC\$ \$SERVICESTATE\$ \$SERVICEOUTPUT\$ \$SERVICESTATETYPE\$\n" ;
-    print "       nagios2vigilo --event \$TIMET\$ \$HOSTNAME\$ Host \$HOSTSTATE\$ \$HOSTOUTPUT\$ \$HOSTSTATETYPE\$\n" ;
+    print "       nagios2vigilo --event \$TIMET\$ \$HOSTNAME\$ '' \$HOSTSTATE\$ \$HOSTOUTPUT\$ \$HOSTSTATETYPE\$\n" ;
 }
 
 sub print_help () {
