@@ -7,7 +7,7 @@ Version:    @VERSION@
 Release:    @RELEASE@%{?dist}
 Source0:    %{name}-%{version}.tar.gz
 URL:        http://www.projet-vigilo.org
-Group:      System/Servers
+Group:      Applications/System
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-build
 License:    GPLv2
 #Buildarch:  noarch  # On installe dans _libdir
@@ -31,7 +31,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    -n vigilo-nagios-config
 Summary:    Nagios configuration for Vigilo
-Group:      System/Servers
+Group:      Applications/System
 Requires:   nagios >= 3
 Requires:   nagios-plugins-fping
 
@@ -41,7 +41,7 @@ This package is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    -n vigilo-nrpe-config
 Summary:    NRPE configuration for the Vigilo plugins
-Group:      System/Servers
+Group:      Applications/System
 Requires:   nrpe
 
 %description -n vigilo-nrpe-config
@@ -50,7 +50,7 @@ This package is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    cpu
 Summary:    Additionnal plugins for Nagios: CPU check
-Group:      System/Servers
+Group:      Applications/System
 
 %description cpu
 Additionnal Nagios plugin for CPU checking.
@@ -58,7 +58,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    https_via_proxy
 Summary:    Additionnal plugins for Nagios: HTTPS/Proxy
-Group:      System/Servers
+Group:      Applications/System
 Requires:   curl
 
 %description https_via_proxy
@@ -67,7 +67,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    ipmi
 Summary:    Additionnal plugins for Nagios: IPMI-enabled hardware
-Group:      System/Servers
+Group:      Applications/System
 Requires:   ipmitool
 
 %description ipmi
@@ -76,7 +76,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    megaraid
 Summary:    Additionnal plugins for Nagios: LSI MegaRAID hardware
-Group:      System/Servers
+Group:      Applications/System
 Requires:   megacli
 
 %description megaraid
@@ -85,7 +85,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    raid
 Summary:    Additionnal plugins for Nagios: software RAID on Linux
-Group:      System/Servers
+Group:      Applications/System
 Requires:   sudo
 
 %description raid
@@ -94,7 +94,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    sysuptime
 Summary:    Additionnal plugins for Nagios: system uptime
-Group:      System/Servers
+Group:      Applications/System
 
 %description sysuptime
 Additionnal Nagios plugin for system uptime.
@@ -102,7 +102,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 
 %package    udp_simple
 Summary:    Additionnal plugins for Nagios: UDP-based servers
-Group:      System/Servers
+Group:      Applications/System
 Requires:   sudo
 Requires:   nmap
 
