@@ -33,7 +33,7 @@ This application is part of the Vigilo Project <http://vigilo-project.org>
 Summary:    Nagios configuration for Vigilo
 Group:      Applications/System
 Requires:   nagios >= 3
-#Requires:   nagios-check_fping
+Requires:   nagios-check_icmp
 
 %description -n vigilo-nagios-config
 This contains the Vigilo configuration for Nagios.

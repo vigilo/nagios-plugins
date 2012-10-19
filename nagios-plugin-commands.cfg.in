@@ -128,68 +128,35 @@ define command{
         command_name    check_ntp_ntpq
         command_line    LC_NUMERIC=C @PLUGINDIR@/check_ntp_peer -H $HOSTADDRESS$ -j 10 -k 15
 }
-# $Id: check_ping.cfg 148613 2008-01-11 17:59:43Z oden $
-# 'check_ping' command definition
+
+# 'check_icmp' command definition
 define command{
-        command_name    check_ping
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
+        command_name    check_icmp
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_icmp -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
 }
 
 # 'check-host-alive' command definition
 define command{
         command_name    check-host-alive
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_fping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -n 1
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_icmp -H $HOSTADDRESS$ -w 5000,100% -c 5000,100%
 }
 
 # 'check-printer-alive' command definition
 define command{
         command_name    check-printer-alive
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_icmp -H $HOSTADDRESS$ -w 5000,100% -c 5000,100%
 }
 
 # 'check-switch-alive' command definition
 define command{
         command_name    check-switch-alive
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_icmp $HOSTADDRESS$ -w 5000,100% -c 5000,100%
 }
 
 # 'check-router-alive' command definition
 define command{
         command_name    check-router-alive
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1
-}
-
-####
-# use these checks, if you want to test IPv4 connectivity on IPv6 enabled systems
-
-# 'check_ping_4' command definition
-define command{
-        command_name    check_ping_4
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -4
-}
-
-# 'check-host-alive_4' command definition
-define command{
-        command_name    check-host-alive_4
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
-}
-
-# 'check-printer-alive_4' command definition
-define command{
-        command_name    check-printer-alive_4
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
-}
-
-# 'check-switch-alive_4' command definition
-define command{
-        command_name    check-switch-alive_4
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
-}
-
-# 'check-router-alive_4' command definition
-define command{
-        command_name    check-router-alive_4
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ping -H $HOSTADDRESS$ -w 5000,100% -c 5000,100% -p 1 -4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_icmp -H $HOSTADDRESS$ -w 5000,100% -c 5000,100%
 }
 
 # 'check_procs' command definition
