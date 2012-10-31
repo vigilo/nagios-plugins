@@ -150,7 +150,7 @@ define command{
 # 'check-switch-alive' command definition
 define command{
         command_name    check-switch-alive
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_icmp $HOSTADDRESS$ -w 5000,100% -c 5000,100%
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_icmp -H $HOSTADDRESS$ -w 5000,100% -c 5000,100%
 }
 
 # 'check-router-alive' command definition
