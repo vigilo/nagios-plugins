@@ -2,48 +2,80 @@
 # -*- makefile -*-
 
 # Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
+export DH_VERBOSE=1
+export DH_OPTIONS=-v
 
-# This has to be exported to make some magic below work.
-export DH_OPTIONS
+PREFIX=vigilo-nagios-plugins
+NAGIOSCONF=/etc/nagios-plugins/config/
+NAGIOSPLUG=/usr/lib/nagios/plugins/
 
+PKGNAME=$(shell printf "%s" `dpkg-parsechangelog | grep '^Source:' | cut -d: -f2-`)
+VERSION=$(shell printf "%s" `dpkg-parsechangelog | grep '^Version:' | cut -d: -f2-`)
 
-build: 
+%:
+	dh $@
 
-clean:
-	dh_testdir
-	dh_testroot
-	dh_clean 
+override_dh_auto_install:
+	# Plugins.
+	# - cpu
+	mkdir -p debian/$(PREFIX)-cpu/$(NAGIOSPLUG)/
+	mkdir -p debian/$(PREFIX)-cpu/$(NAGIOSCONF)/
+	install -p -m 755 plugins/check_cpu				debian/$(PREFIX)-cpu/$(NAGIOSPLUG)/
+	install -p -m 644 conf/check_cpu.cfg			debian/$(PREFIX)-cpu/$(NAGIOSCONF)/
+	#
+	# - https-via-proxy
+	mkdir -p debian/$(PREFIX)-https-via-proxy/$(NAGIOSPLUG)/
+	mkdir -p debian/$(PREFIX)-https-via-proxy/$(NAGIOSCONF)/
+	install -p -m 755 plugins/check_https_via_proxy	debian/$(PREFIX)-https-via-proxy/$(NAGIOSPLUG)/
+	install -p -m 644 conf/check_proxy_ssl.cfg		debian/$(PREFIX)-https-via-proxy/$(NAGIOSCONF)/
+	#
+	# - ipmi
+	mkdir -p debian/$(PREFIX)-ipmi/$(NAGIOSPLUG)/
+	mkdir -p debian/$(PREFIX)-ipmi/$(NAGIOSCONF)/
+	install -p -m 755 plugins/check_ipmi			debian/$(PREFIX)-ipmi/$(NAGIOSPLUG)/
+	install -p -m 644 conf/check_ipmi.cfg			debian/$(PREFIX)-ipmi/$(NAGIOSCONF)/
+	#
+	# - megaraid
+	mkdir -p debian/$(PREFIX)-megaraid/$(NAGIOSPLUG)/
+	mkdir -p debian/$(PREFIX)-megaraid/$(NAGIOSCONF)/
+	install -p -m 755 plugins/check_megaraid		debian/$(PREFIX)-megaraid/$(NAGIOSPLUG)/
+	install -p -m 644 conf/check_megaraid.cfg		debian/$(PREFIX)-megaraid/$(NAGIOSCONF)/
+	#
+	# - raid
+	mkdir -p debian/$(PREFIX)-raid/$(NAGIOSPLUG)/
+	mkdir -p debian/$(PREFIX)-raid/$(NAGIOSCONF)/
+	install -p -m 755 plugins/check_raid			debian/$(PREFIX)-raid/$(NAGIOSPLUG)/
+	#
+	# - sysuptime
+	mkdir -p debian/$(PREFIX)-sysuptime/$(NAGIOSPLUG)/
+	mkdir -p debian/$(PREFIX)-sysuptime/$(NAGIOSCONF)/
+	install -p -m 755 plugins/check_sysuptime		debian/$(PREFIX)-sysuptime/$(NAGIOSPLUG)/
+	#
+	# - udp-simple
+	mkdir -p debian/$(PREFIX)-udp-simple/$(NAGIOSPLUG)/
+	mkdir -p debian/$(PREFIX)-udp-simple/$(NAGIOSCONF)/
+	install -p -m 755 plugins/check_udp_simple		debian/$(PREFIX)-udp-simple/$(NAGIOSPLUG)/
+	install -p -m 644 conf/check_udp_simple.cfg		debian/$(PREFIX)-udp-simple/$(NAGIOSCONF)/
+	#
+	# Nagios config.
+	#
+	mkdir -p debian/vigilo-nagios-config/etc/nagios3/vigilo.d/
+	mkdir -p debian/vigilo-nagios-config/$(NAGIOSCONF)/
+	install -p -m 644 vigilo.cfg debian/vigilo-nagios-config/etc/nagios3/vigilo.d/vigilo.cfg
+	install -p -m 644 vigilo-commands.cfg debian/vigilo-nagios-config/$(NAGIOSCONF)/vigilo-commands.cfg
+	mkdir -p debian/vigilo-nagios-config/$(NAGIOSPLUG)/eventhandlers
+	install -p -m 755 handlers/*.pl debian/vigilo-nagios-config/$(NAGIOSPLUG)/eventhandlers/
+	mkdir -p debian/vigilo-nagios-config/etc/cron.daily/
+	install -p -m 755 nagios-restart.sh debian/vigilo-nagios-config/etc/cron.daily/vigilo-nagios-restart.sh
+	#
+	# NRPE config.
+	#
+	mkdir -p debian/vigilo-nrpe-config/etc/nagios/nrpe.d/
+	install -p -m 644 nrpe.cfg debian/vigilo-nrpe-config/etc/nagios/nrpe.d/vigilo.cfg
+	#
+	# Main package.
+	#
+	# Nothing to do. Everything has already been taken care of
+	# in the package named vigilo-nagios-config.
 
-install: 
-	dh_testdir
-	dh_testroot
-	dh_clean -k
-	dh_installdirs
-	for plugin in `ls plugins/check_*`; do \
-		if echo $$plugin | grep -qs "_hp_"; then \
-			install -p -m 755 $$plugin $(CURDIR)/debian/nagios-plugins-hp/usr/lib/nagios/plugins/; \
-		else \
-			install -p -m 755 $$plugin $(CURDIR)/debian/nagios-plugins-vigilo/usr/lib/nagios/plugins/; \
-		fi; \
-	done
-	install -p -m 755 plugins/perfdata $(CURDIR)/debian/nagios-plugins-vigilo/usr/lib/nagios/plugins/; \
-	cp -p conf/*.cfg $(CURDIR)/debian/nagios-plugins-vigilo/etc/nagios-plugins/config/
-	dh_install
-
-binary: install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs 
-	dh_strip
-	dh_compress 
-	dh_fixperms
-	dh_perl
-	dh_makeshlibs
-	dh_installdeb
-	dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
-
-.PHONY: build clean binary install
+.PHONY: override_dh_auto_install

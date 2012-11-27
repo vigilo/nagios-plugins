@@ -1,44 +1,11 @@
-nagios-plugins-vigilo (1.6) unstable; urgency=low
+vigilo-nagios-plugins (3.0.0.g79567ea-1) unstable; urgency=low
 
-  * Add RRD checking plugin
+  * New upstream release.
 
- -- Aurélien Bompard <aurelien.bompard@c-s.fr>  Wed,  1 Oct 2008 11:57:18 +0200
+ -- François Poirotte <francois.poirotte@c-s.fr>  Sat, 24 Nov 2012 12:26:01 +0100
 
-nagios-plugins-vigilo (1.5) unstable; urgency=low
-
-  * add IPMI deps
-
- -- Aurélien Bompard <aurelien.bompard@c-s.fr>  Thu, 25 Sep 2008 15:11:18 +0200
-
-nagios-plugins-vigilo (1.4) unstable; urgency=low
-
-  * Add check_raid
-
- -- Aurélien Bompard <aurelien.bompard@c-s.fr>  Thu, 25 Sep 2008 11:57:22 +0200
-
-nagios-plugins-vigilo (1.3) unstable; urgency=low
-
-  * add perfdata plugin
-
- -- Aurélien Bompard <aurelien.bompard@c-s.fr>  Mon,  1 Oct 2007 10:52:21 +0200
-
-nagios-plugins-vigilo (1.2) unstable; urgency=low
-
-  * add several plugins
-  * add config files
-
- -- Aurélien Bompard <aurelien.bompard@c-s.fr>  Thu, 13 Sep 2007 16:51:55 +0200
-
-nagios-plugins-vigilo (1.1-1) unstable; urgency=low
-
-  * Add sysuptime plugin
-  * New way to filter hp plugins from others
-
- -- Aurélien BOMPARD <aurelien.bompard@c-s.fr>  Thu, 29 Mar 2007 16:31:18 +0200
-
-nagios-plugins-vigilo (1.0-1) unstable; urgency=low
+vigilo-nagios-plugins (2.1.2.dev-g0d9fe29-1) unstable; urgency=low
 
   * Initial release
 
- -- Aurélien BOMPARD <aurelien.bompard@c-s.fr>  Fri,  9 Mar 2007 11:12:35 +0100
-
+ -- Francois Poirotte <francois.poirotte@c-s.fr>  Sat, 10 Nov 2012 21:25:11 +0100

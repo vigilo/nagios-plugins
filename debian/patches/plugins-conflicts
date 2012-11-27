@@ -1,0 +1,28 @@
+Description: prevent conflict with Nagios plugins from other Debian packages.
+Forwarded: not-needed.
+--- a/vigilo-commands.cfg
++++ b/vigilo-commands.cfg
+@@ -4,3 +4,10 @@
+         command_name    check_http_url
+         command_line    /usr/lib64/nagios/plugins/check_http -H $HOSTADDRESS$ -p $ARG1$ -u $ARG2$
+ }
++
++# 'check_icmp' command definition
++define command{
++        command_name    check_icmp
++        command_line    LC_NUMERIC=C /usr/lib64/nagios/plugins/check_icmp -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
++}
++
+--- a/vigilo.cfg
++++ b/vigilo.cfg
+@@ -88,10 +88,6 @@
+     command_line    $USER1$/check_sysuptime -v3 -U $ARG3$ -A $ARG4$  -a MD5  -L authNoPriv -H $HOSTADDRESS$ -W $ARG2$ -T $ARG1$
+ }
+ define command{
+-    command_name    check_tcp
+-    command_line    $USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$
+-}
+-define command{
+     command_name    report_stale
+     command_line    $USER1$/check_dummy 2 "No heartbeat received"
+ }
