@@ -1,5 +1,5 @@
 %define module  nagios-plugins
-%define nagios_plugins_cfg plugins.d/
+%define nagios_plugins_cfg plugins.d
 
 Name:       vigilo-%{module}
 Summary:    Additional Nagios plugins
@@ -149,6 +149,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /etc/cron.daily/*.sh
 # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/nagios-plugin-commands.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_dummy.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_tcp.cfg
 
 %files -n vigilo-nrpe-config
 %defattr(644,root,root,755)

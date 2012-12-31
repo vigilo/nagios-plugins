@@ -3,19 +3,19 @@
 ############
 define command{
     command_name    host-notify-bus
-    command_line    $USER1$/eventhandlers/nagios2vigilo.pl --event '$TIMET$' '$HOSTNAME$' '' '$HOSTSTATE$' '$HOSTOUTPUT$' '$HOSTSTATETYPE$'
+    command_line    @NEHDIR@/nagios2vigilo.pl --event '$TIMET$' '$HOSTNAME$' '' '$HOSTSTATE$' '$HOSTOUTPUT$' '$HOSTSTATETYPE$'
 }
 define command{
     command_name    service-notify-bus
-    command_line    $USER1$/eventhandlers/nagios2vigilo.pl --event '$TIMET$' '$HOSTNAME$' '$SERVICEDESC$' '$SERVICESTATE$' '$SERVICEOUTPUT$' '$SERVICESTATETYPE$'
+    command_line    @NEHDIR@/nagios2vigilo.pl --event '$TIMET$' '$HOSTNAME$' '$SERVICEDESC$' '$SERVICESTATE$' '$SERVICEOUTPUT$' '$SERVICESTATETYPE$'
 }
 define command{
     command_name    ochp-bus
-    command_line    $USER1$/eventhandlers/nagios2vigilo.pl --state '$TIMET$' '$HOSTNAME$' '$HOSTADDRESS$' '' '$HOSTSTATEID$' '$HOSTSTATETYPE$' '$HOSTATTEMPT$' '$HOSTOUTPUT$'
+    command_line    @NEHDIR@/nagios2vigilo.pl --state '$TIMET$' '$HOSTNAME$' '$HOSTADDRESS$' '' '$HOSTSTATEID$' '$HOSTSTATETYPE$' '$HOSTATTEMPT$' '$HOSTOUTPUT$'
 }
 define command{
     command_name    ocsp-bus
-    command_line    $USER1$/eventhandlers/nagios2vigilo.pl --state '$TIMET$' '$HOSTNAME$' '$HOSTADDRESS$' '$SERVICEDESC$' '$SERVICESTATEID$' '$SERVICESTATETYPE$' '$SERVICEATTEMPT$' '$SERVICEOUTPUT$'
+    command_line    @NEHDIR@/nagios2vigilo.pl --state '$TIMET$' '$HOSTNAME$' '$HOSTADDRESS$' '$SERVICEDESC$' '$SERVICESTATEID$' '$SERVICESTATETYPE$' '$SERVICEATTEMPT$' '$SERVICEOUTPUT$'
 }
 define command{
     command_name    vigilo-notify-host-by-email
@@ -26,78 +26,12 @@ define command{
     command_line    /usr/bin/printf "%b" "***** Vigilo *****\n\nNotification Type: $NOTIFICATIONTYPE$\n\nService: $SERVICEDESC$\nHost: $HOSTALIAS$\nAddress: $HOSTADDRESS$\nState: $SERVICESTATE$\n\nDate/Time: $LONGDATETIME$\n\nAdditional Info:\n\n$SERVICEOUTPUT$\n" | /bin/mail -s "[VIGILO] ** $NOTIFICATIONTYPE$ Service Alert: $HOSTALIAS$/$SERVICEDESC$ is $SERVICESTATE$ **" $CONTACTEMAIL$
 }
 define command{
-    command_name    check_dhcp_sudo
-    command_line    /usr/bin/sudo $USER1$/check_dhcp -s $HOSTADDRESS$
-}
-define command {
-    command_name    check_nrpe_rerouted
-    command_line    $USER1$/check_nrpe -H $ARG1$ -c $ARG2$ -a $ARG3$
-}
-define command {
-    command_name    check_nrpe_nossl
-    command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -n -c $ARG1$ -a $ARG2$
-}
-define command {
-    command_name    check_nrpe_1arg_nossl
-    command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -n -c $ARG1$
-}
-define command {
-    command_name    check_nrpe_1arg_timeout
-    command_line    $USER1$/check_nrpe -t 15 -H $HOSTADDRESS$ -c $ARG1$
-}
-define command{
-    command_name    check_proxy_noauth
-    command_line    $USER1$/check_http -H $ARG2$ -I $HOSTADDRESS$ -p $ARG1$ -u http://$ARG2$
-}
-define command{
-    command_name    check_proxy_auth
-    command_line    $USER1$/check_http -H $ARG2$ -I $HOSTADDRESS$ -p $ARG1$ -u http://$ARG2$ -k "Proxy-Authorization: Basic login:passbase64encoded"
-}
-define command{
-    command_name    my_check_radius
-    command_line    $USER1$/check_radius -H $HOSTADDRESS$ -t 15 -P 1812 -F /etc/radiusclient/radiusclient.conf -u $ARG1$ -p $ARG2$
-}
-define command{
-    command_name    process-service-perfdata
-    command_line    $USER1$/perfdata2vigilo -c /etc/vigilo/perfdata2vigilo/general.conf -H '$HOSTNAME$' -s '$SERVICEDESC$' -a '$SERVICESTATE$' -t '$LASTSERVICECHECK$' -v '$SERVICEPERFDATA$'
-}
-define command{
-    command_name    process-host-perfdata
-    command_line    $USER1$/perfdata2vigilo -c /etc/vigilo/perfdata2vigilo/general.conf -H '$HOSTNAME$' -a '$HOSTSTATE$' -t '$LASTHOSTCHECK$' -v '$HOSTPERFDATA$'
-}
-define command{
-    command_name    Collector
-    command_line    $USER1$/Collector -H '$HOSTNAME$'
-}
-define command{
-    command_name    check_dummy
-    command_line    $USER1$/check_dummy 0
-}
-define command{
-    command_name    check_ldap_v3
-    command_line    $USER1$/check_ldap -H $HOSTADDRESS$ -3 -b $ARG1$
-}
-define command{
-    command_name    check_sysUpTime_v2
-    #command_line   $USER1$/check_snmp -P 2c -H $HOSTADDRESS$ -C $ARG1$ -c $ARG2$: -w $ARG3$: -o iso.3.6.1.2.1.1.3.0
-    command_line    $USER1$/check_sysuptime -v2 -C $ARG1$ -H $HOSTADDRESS$ -W $ARG3$ -T $ARG2$
-}
-define command{
-    command_name    check_sysUpTime_v3
-    #command_line   $USER1$/check_snmp -P 3 -H $HOSTADDRESS$ -c $ARG1$: -w $ARG2$: -o iso.3.6.1.2.1.1.3.0 -L authNoPriv -U $ARG3$ -a MD5 -A $ARG4$
-    command_line    $USER1$/check_sysuptime -v3 -U $ARG3$ -A $ARG4$  -a MD5  -L authNoPriv -H $HOSTADDRESS$ -W $ARG2$ -T $ARG1$
-}
-define command{
-    command_name    check_tcp
-    command_line    $USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$
-}
-define command{
     command_name    report_stale
-    command_line    $USER1$/check_dummy 2 "No heartbeat received"
+    command_line    @NPLUGDIR@/check_dummy 2 "No heartbeat received"
 }
 define command{
     command_name    report_stale_data
-    command_line    $USER1$/check_dummy 3 "No data received for too long"
+    command_line    @NPLUGDIR@/check_dummy 3 "No data received for too long"
 }
 
 
@@ -524,7 +458,7 @@ define service{
 define service {
     name                            generic-passive-service
     use                             generic-active-service
-    check_command                   check_dummy
+    check_command                   return-ok
     passive_checks_enabled          1       ; Passive service checks are enabled/accepted
     active_checks_enabled           0       ; Active service checks are disabled
     register                        0

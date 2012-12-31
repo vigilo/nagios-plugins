@@ -1,5 +1,5 @@
 %define module  nagios-plugins
-%define nagios_plugins_cfg plugins.d/
+%define nagios_plugins_cfg plugins.d
 
 Name:       vigilo-%{module}
 Summary:    Additional Nagios plugins
