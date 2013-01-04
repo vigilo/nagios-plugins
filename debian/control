@@ -1,5 +1,5 @@
 Source: vigilo-nagios-plugins
-Section: vigilo
+Section: contrib/net
 Priority: extra
 Maintainer: Vigilo Team <contact@projet-vigilo.org>
 Build-Depends: debhelper (>= 5)
@@ -16,7 +16,7 @@ Depends:
  vigilo-nagios-plugins-raid,
  vigilo-nagios-plugins-sysuptime,
  vigilo-nagios-plugins-udp-simple
-Description: Additional Nagios plugins
+Description: Additional Nagios plugins (meta-package)
  Additionnal plugins for the Nagios supervision system
 
 Package: vigilo-nagios-config
@@ -81,4 +81,3 @@ Depends: sudo, nmap
 Description: Additionnal plugins for Nagios: UDP-based servers
  Additionnal Nagios plugins for UDP-based server.
  This application is part of the Vigilo Project <http://vigilo-project.org>
-

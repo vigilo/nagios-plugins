@@ -1,0 +1,2 @@
+debian/tmp/usr/lib/nagios/plugins/check_udp_simple
+debian/tmp/etc/nagios-plugins/config/check_udp_simple.cfg

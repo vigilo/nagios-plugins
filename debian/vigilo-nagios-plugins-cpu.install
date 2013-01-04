@@ -1,0 +1,2 @@
+debian/tmp/usr/lib/nagios/plugins/check_cpu
+debian/tmp/etc/nagios-plugins/config/check_cpu.cfg

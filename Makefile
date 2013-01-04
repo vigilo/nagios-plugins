@@ -1,6 +1,5 @@
 NAME = nagios-plugins
 NEHDIR = $(NPLUGDIR)/eventhandlers
-VIGILOCONFDIR = $(SYSCONFDIR)/nagios/vigilo.d
 PYTHON = /usr/bin/python
 
 SUBSTFILES = \
@@ -30,10 +29,10 @@ install: $(SUBSTFILES)
 	rm -f $(DESTDIR)$(NPLUGDIR)/*.in
 	mkdir -p $(DESTDIR)$(NPCONFDIR)/
 	cp -p conf/*.cfg $(DESTDIR)$(NPCONFDIR)/
-	mkdir -p $(DESTDIR)$(SYSCONFDIR)/nrpe.d/
-	mkdir -p $(DESTDIR)$(VIGILOCONFDIR)/
-	install -p -m 644 nrpe.cfg $(DESTDIR)$(SYSCONFDIR)/nrpe.d/vigilo.cfg
-	install -p -m 644 vigilo.cfg $(DESTDIR)$(VIGILOCONFDIR)/vigilo.cfg
+	mkdir -p $(DESTDIR)$(NRPECONFDIR)/
+	mkdir -p $(DESTDIR)$(NCONFDIR)/vigilo.d/
+	install -p -m 644 nrpe.cfg $(DESTDIR)$(NRPECONFDIR)/vigilo.cfg
+	install -p -m 644 vigilo.cfg $(DESTDIR)$(NCONFDIR)/vigilo.d/vigilo.cfg
 	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(NPCONFDIR)/vigilo-commands.cfg
 	mkdir -p $(DESTDIR)$(NEHDIR)/
 	install -p -m 755 handlers/*.pl $(DESTDIR)$(NEHDIR)/

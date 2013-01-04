@@ -1,0 +1,2 @@
+debian/tmp/usr/lib/nagios/plugins/check_https_via_proxy
+debian/tmp/etc/nagios-plugins/config/check_proxy_ssl.cfg
