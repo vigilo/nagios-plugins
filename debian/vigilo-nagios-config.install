@@ -1,4 +1,5 @@
 debian/tmp/etc/nagios3/vigilo.d/vigilo.cfg
 debian/tmp/etc/nagios-plugins/config/vigilo-commands.cfg
+debian/tmp/etc/nagios-plugins/config/check_icmp.cfg
 debian/tmp/usr/lib/nagios/plugins/eventhandlers/*.pl
 debian/tmp/etc/cron.daily/vigilo-nagios-restart.sh

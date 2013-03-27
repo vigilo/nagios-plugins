@@ -150,6 +150,7 @@ rm -rf $RPM_BUILD_ROOT
 # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/nagios-plugin-commands.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_dummy.cfg
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_icmp.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_tcp.cfg
 
 %files -n vigilo-nrpe-config

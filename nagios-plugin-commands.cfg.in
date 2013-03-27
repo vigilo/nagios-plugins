@@ -129,12 +129,6 @@ define command{
         command_line    LC_NUMERIC=C @PLUGINDIR@/check_ntp_peer -H $HOSTADDRESS$ -j 10 -k 15
 }
 
-# 'check_icmp' command definition
-define command{
-        command_name    check_icmp
-        command_line    LC_NUMERIC=C @PLUGINDIR@/check_icmp -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
-}
-
 # 'check-host-alive' command definition
 define command{
         command_name    check-host-alive

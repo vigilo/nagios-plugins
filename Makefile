@@ -58,6 +58,7 @@ ifeq ($(DISTRO),redhat)
 	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(NPCONFDIR)/
 	install -p -m 644 conf/check_tcp.cfg $(DESTDIR)$(NPCONFDIR)/
 	install -p -m 644 conf/check_dummy.cfg $(DESTDIR)$(NPCONFDIR)/
+	install -p -m 644 conf/check_icmp.cfg $(DESTDIR)$(NPCONFDIR)/
 endif
 ifeq ($(DISTRO),debian)
 	# Sur Debian, check_icmp est fourni sans son fichier de configuration.
