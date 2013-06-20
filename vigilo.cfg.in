@@ -27,11 +27,11 @@ define command{
 }
 define command{
     command_name    report_stale
-    command_line    @NPLUGDIR@/check_dummy 2 "No heartbeat received"
+    command_line    @PLUGINDIR@/check_dummy 2 "No heartbeat received"
 }
 define command{
     command_name    report_stale_data
-    command_line    @NPLUGDIR@/check_dummy 3 "No data received for too long"
+    command_line    @PLUGINDIR@/check_dummy 3 "No data received for too long"
 }
 
 
