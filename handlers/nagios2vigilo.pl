@@ -26,7 +26,8 @@
 #   | socat -u - UNIX-CONNECT:/var/lib/vigilo/connector-nagios/send.sock
 
 package nagios2vigilo;
-my(%ERRORS) = ( OK=>0, WARNING=>1, CRITICAL=>2, UNKNOWN=>3, WARN=>1, CRIT=>2 );
+my %ERRORS = ( OK=>0, WARNING=>1, CRITICAL=>2, UNKNOWN=>3, WARN=>1, CRIT=>2 );
+my %nagios_codes = ( 0=>"OK", 1=>"WARNING", 2=>"CRITICAL", 3=>"UNKNOWN");
 
 use POSIX;
 use Getopt::Long;
@@ -64,6 +65,7 @@ GetOptions
 
 my $nb_param = scalar @ARGV;
 my $message;
+my $message2;
 
 if ($opt_h) {
     print_help(); exit $ERRORS{'UNKNOWN'};
@@ -84,16 +86,28 @@ if ( $event && $nb_param eq 6) {
 } else {
     print_help(); exit $ERRORS{'UNKNOWN'};
 }
-
 foreach my $arg ( @ARGV ) {
     $message = $message . "|" . $arg ;
 }
 $message = $message . "\n" ;
 
-
-
+# Ouverture de la socket du connecteur Nagios
 my $sock = IO::Socket::UNIX->new( Type => IO::Socket::SOCK_STREAM, Peer => $connector_socket) or die ("error while trying to open socket to $connector_socket");
+
+# Envoi du message sur la socket
 $sock->send("$message");
 print "nagios2vigilo : $message" if ($debug);
+
+# Traitement des messages de type state concernant un connecteur Nagios :
+# on construit un second message de type event pour l'auto-supervision
+if ($state && $ARGV[3] eq "vigilo-connector-nagios") {
+    $message2 = "event|" . $ARGV[0] . "|" . $ARGV[1] . "|" . $ARGV[3] . "|";
+    $message2 = $message2 . $nagios_codes{$ARGV[4]} . "|" . $ARGV[7] . "\n";
+    # Et on l'envoie sur la socket
+    $sock->send("$message2");
+    print "nagios2vigilo : $message2" if ($debug);
+}
+
+# Fermeture de la socket
 $sock->close();
 
