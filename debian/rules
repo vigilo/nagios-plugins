@@ -7,3 +7,11 @@ export DH_OPTIONS=-v
 
 %:
 	dh $@
+
+override_dh_auto_clean:
+	dh_auto_clean
+ifneq "$(NOPY)" ""
+	-rm -f $(CURDIR)/debian/docs $(CURDIR)/debian/copyright
+endif
+
+.PHONY: override_dh_auto_clean
