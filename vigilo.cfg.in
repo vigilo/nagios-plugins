@@ -88,7 +88,7 @@ define timeperiod{
     friday          00:00-24:00
     saturday        00:00-24:00
 }
-    define timeperiod{
+define timeperiod{
     timeperiod_name workhours
     alias           Standard Work Hours
     monday          09:00-17:00
