@@ -46,6 +46,7 @@ install: $(SUBSTFILES)
 	install -p -m 755 nagios-restart.sh $(DESTDIR)/etc/cron.daily/vigilo-nagios-restart.sh
 	# Installation des plugins Nagios.
 	install -p -m 755 plugins/check_* $(DESTDIR)$(NPLUGDIR)/
+	install -p -m 755 plugins/utils_vigilo.py $(DESTDIR)$(NPLUGDIR)/
 	rm -f $(DESTDIR)$(NPLUGDIR)/*.in
 	# Installation des configurations des plugins Nagios.
 	install -p -m 644 conf/check_cpu.cfg $(DESTDIR)$(NPCONFDIR)/
