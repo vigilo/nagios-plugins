@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: fileencoding=utf-8 sw=4 ts=4 et ai
+# Copyright (C) 2015-2015 CS-SI
+# License: GNU GPL v2 <http://www.gnu.org/licenses/gpl-2.0.html>
 
 import sys
 
@@ -74,7 +76,7 @@ def exit_nagios(state, message, metrics=None):
         if isinstance(v, (str, unicode, int, float)):
             perfdata.append("'%s'=%s" % (k, v))
         else:
-            perfdata.append("'%s'=%s" % (k, ';'.join(v)))
+            perfdata.append("'%s'=%s" % (k, ';'.join(str(s) for s in v)))
     if perfdata:
         message += '|' + ' '.join(perfdata)
 
