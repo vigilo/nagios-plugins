@@ -80,7 +80,7 @@ def exit_nagios(state, message, metrics=None):
     if perfdata:
         message += '|' + ' '.join(perfdata)
 
-    print "%s: %s" % (getState(state), message)
+    print "%s: %s" % (get_state(state), message)
     sys.exit(state)
 
 
