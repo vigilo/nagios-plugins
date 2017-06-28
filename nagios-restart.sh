@@ -7,7 +7,7 @@
 #  * http://tracker.nagios.org/view.php?id=71
 #  * http://tracker.nagios.org/view.php?id=92
 
-/etc/init.d/nagios stop
+service nagios stop
 for i in `seq 20`; do
     pgrep -u nagios nagios >/dev/null || break
     sleep 1
@@ -23,4 +23,4 @@ if [ $? -eq 0 ]; then
     sudo -u nagios pkill -KILL -u nagios nagios
 fi
 
-/etc/init.d/nagios start
+service nagios start
