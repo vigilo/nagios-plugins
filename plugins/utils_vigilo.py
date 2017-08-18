@@ -3,6 +3,7 @@
 # Copyright (C) 2015-2016 CS-SI
 # License: GNU GPL v2 <http://www.gnu.org/licenses/gpl-2.0.html>
 
+from __future__ import print_function
 import sys
 
 
@@ -80,7 +81,7 @@ def exit_nagios(state, message, metrics=None):
     if perfdata:
         message += '|' + ' '.join(perfdata)
 
-    print "%s: %s" % (get_state(state), message)
+    print("%s: %s" % (get_state(state), message))
     sys.exit(state)
 
 
