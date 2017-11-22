@@ -40,9 +40,11 @@ define command{
     command_line    @PLUGINDIR@/check_http -H $ARG2$ -I $HOSTADDRESS$ -p $ARG1$ -u http://$ARG2$ -k "Proxy-Authorization: Basic login:passbase64encoded"
 }
 
+# Contrary to the default "check_ldaps" check, this one uses an
+# already-encrypted SSL connection rather than STARTTLS.
 define command{
-    command_name    check_ldap_v3
-    command_line    @PLUGINDIR@/check_ldap -H $HOSTADDRESS$ -3 -b $ARG1$
+    command_name    check_ldap_ssl
+    command_line    @PLUGINDIR@/check_ldap -H $HOSTADDRESS$ --ssl -b '$ARG1$'
 }
 
 define command{

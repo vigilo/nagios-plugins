@@ -205,3 +205,35 @@ define command {
         command_name    nrpe_check_control
         command_line    LC_NUMERIC=C @PLUGINDIR@/nrpe_check_control $SERVICESTATE$ $SERVICESTATETYPE$ $SERVICEATTEMPT$ "$HOSTNAME$"
 }
+
+# 'check_ldap' command definition
+define command{
+        command_name    check_ldap
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ldap -H '$HOSTADDRESS$' -b '$ARG1$'
+}
+
+# 'check_ldaps' command definition
+# This was using 'check_ldaps' in the past which used port 389 and starttls
+# mechanism on default, keeped for backward compatibility
+define command{
+        command_name    check_ldaps
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ldap -H '$HOSTADDRESS$' -T -b '$ARG1$'
+}
+
+####
+# use these checks, if you want to test IPv4 connectivity on IPv6 enabled systems
+####
+
+# 'check_ldap_4' command definition
+define command{
+        command_name    check_ldap_4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ldap -H '$HOSTADDRESS$' -b '$ARG1$' -4
+}
+
+# 'check_ldaps_4' command definition
+# This was using 'check_ldaps' in the past which used port 389 and starttls
+# mechanism on default, keeped for backward compatibility
+define command{
+        command_name    check_ldaps_4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ldap -H '$HOSTADDRESS$' -T -b '$ARG1$' -4
+}
