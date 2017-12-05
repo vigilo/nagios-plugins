@@ -237,3 +237,104 @@ define command{
         command_name    check_ldaps_4
         command_line    LC_NUMERIC=C @PLUGINDIR@/check_ldap -H '$HOSTADDRESS$' -T -b '$ARG1$' -4
 }
+
+# 'check_mysql' command definition
+define command{
+        command_name    check_mysql
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_mysql -H '$HOSTADDRESS$' '$ARG1$'
+}
+
+# 'check_mysql_cmdlinecred' command definition
+define command{
+        command_name    check_mysql_cmdlinecred
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_mysql -H '$HOSTADDRESS$' -u '$ARG1$' -p '$ARG2$' '$ARG3$'
+}
+
+# 'check_mysql_database' command definition
+define command{
+        command_name    check_mysql_database
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_mysql -d '$ARG3$' -H '$HOSTADDRESS$' -u '$ARG1$' -p '$ARG2$' '$ARG3$'
+}
+
+# 'check_mysql_slave' command definition
+define command{
+        command_name    check_mysql_slave
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_mysql -H '$HOSTADDRESS$' -u '$ARG1$' -p '$ARG2$' -S '$ARG3$'
+}
+
+# 'check_pop' command definition
+define command {
+        command_name    check_pop
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_pop -H '$HOSTADDRESS$' '$ARG1$'
+}
+
+
+# 'check_smtp' command definition
+define command {
+        command_name    check_smtp
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_smtp -H '$HOSTADDRESS$' '$ARG1$'
+}
+
+# 'check_ssmtp' command definition
+define command {
+        command_name    check_ssmtp
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ssmtp -H '$HOSTADDRESS$' '$ARG1$'
+}
+
+# 'check_imap' command definition
+define command {
+        command_name    check_imap
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_imap -H '$HOSTADDRESS$' '$ARG1$'
+}
+
+# 'check_spop' command definition
+define command {
+        command_name    check_spop
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_pop -p 995 -H '$HOSTADDRESS$' -S '$ARG1$'
+}
+
+# 'check_simap' command definition
+define command {
+        command_name    check_simap
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_imap -p 993 -H '$HOSTADDRESS$' -S '$ARG1$'
+}
+
+####
+# use these checks, if you want to test IPv4 connectivity on IPv6 enabled systems
+####
+
+# 'check_pop_4' command definition
+define command {
+        command_name    check_pop_4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_pop -H '$HOSTADDRESS$' -4 '$ARG1$'
+}
+
+# 'check_smtp_4' command definition
+define command {
+        command_name    check_smtp_4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_smtp -H '$HOSTADDRESS$' -4 '$ARG1$'
+}
+
+# 'check_ssmtp_4' command definition
+define command {
+        command_name    check_ssmtp_4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_ssmtp -H '$HOSTADDRESS$' -4 '$ARG1$'
+}
+
+# 'check_imap_4' command definition
+define command {
+        command_name    check_imap_4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_imap -H '$HOSTADDRESS$' -4 '$ARG1$'
+}
+
+# 'check_spop_4' command definition
+define command {
+        command_name    check_spop_4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_pop -p 995 -H '$HOSTADDRESS$' -S -4 '$ARG1$'
+}
+
+# 'check_simap_4' command definition
+define command {
+        command_name    check_simap_4
+        command_line    LC_NUMERIC=C @PLUGINDIR@/check_imap -p 993 -H '$HOSTADDRESS$' -S -4 '$ARG1$'
+}
