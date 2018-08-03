@@ -61,7 +61,7 @@ Les plugins Nagios de Vigilo sont sous licence `GPL v2`_.
 
 
 .. _documentation officielle: Vigilo_
-.. _Vigilo: http://www.vigilo-nms.com
+.. _Vigilo: https://www.vigilo-nms.com
 .. _Nagios: http://nagios.org
 .. _NRPE: http://exchange.nagios.org/directory/Addons/Monitoring-Agents/NRPE-%252D-Nagios-Remote-Plugin-Executor/details
 .. _socat: http://www.dest-unreach.org/socat/

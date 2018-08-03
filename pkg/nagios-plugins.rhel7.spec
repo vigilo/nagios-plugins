@@ -6,7 +6,7 @@ Summary:    Additional Nagios plugins
 Version:    @VERSION@
 Release:    @RELEASE@%{?dist}
 Source0:    %{name}-%{version}.tar.gz
-URL:        http://www.vigilo-nms.com
+URL:        https://www.vigilo-nms.com
 Group:      Applications/System
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-build
 License:    GPLv2
@@ -26,7 +26,7 @@ Requires:   sudo
 %description
 Additional Nagios plugins
 Additionnal plugins for the Nagios supervision system
-This application is part of the Vigilo Project <http://vigilo-nms.com>
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 
 %package    -n vigilo-nagios-config
@@ -37,7 +37,7 @@ Requires:   nagios-plugins-icmp
 
 %description -n vigilo-nagios-config
 This contains the Vigilo configuration for Nagios.
-This package is part of the Vigilo Project <http://vigilo-nms.com>
+This package is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    -n vigilo-nrpe-config
 Summary:    NRPE configuration for the Vigilo plugins
@@ -46,7 +46,7 @@ Requires:   nrpe
 
 %description -n vigilo-nrpe-config
 This contains the Vigilo configuration for the Nagios Remote Plugin Executor.
-This package is part of the Vigilo Project <http://vigilo-nms.com>
+This package is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    cpu
 Summary:    Additionnal plugins for Nagios: CPU check
@@ -54,7 +54,7 @@ Group:      Applications/System
 
 %description cpu
 Additionnal Nagios plugin for CPU checking.
-This application is part of the Vigilo Project <http://vigilo-nms.com>
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    https_via_proxy
 Summary:    Additionnal plugins for Nagios: HTTPS/Proxy
@@ -63,7 +63,7 @@ Requires:   curl
 
 %description https_via_proxy
 Additionnal Nagios plugin for HTTPS over proxy checking.
-This application is part of the Vigilo Project <http://vigilo-nms.com>
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    ipmi
 Summary:    Additionnal plugins for Nagios: IPMI-enabled hardware
@@ -72,7 +72,7 @@ Requires:   ipmitool
 
 %description ipmi
 Additionnal Nagios plugin for IPMI-enabled hardware.
-This application is part of the Vigilo Project <http://vigilo-nms.com>
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    megaraid
 Summary:    Additionnal plugins for Nagios: LSI MegaRAID hardware
@@ -81,7 +81,7 @@ Requires:   megacli
 
 %description megaraid
 Additionnal Nagios plugin for LSI MegaRAID hardware.
-This application is part of the Vigilo Project <http://vigilo-nms.com>
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    raid
 Summary:    Additionnal plugins for Nagios: software RAID on Linux
@@ -90,7 +90,7 @@ Requires:   sudo
 
 %description raid
 Additionnal Nagios plugin for software RAID on Linux.
-This application is part of the Vigilo Project <http://vigilo-nms.com>
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    sysuptime
 Summary:    Additionnal plugins for Nagios: system uptime
@@ -98,7 +98,7 @@ Group:      Applications/System
 
 %description sysuptime
 Additionnal Nagios plugin for system uptime.
-This application is part of the Vigilo Project <http://vigilo-nms.com>
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    udp_simple
 Summary:    Additionnal plugins for Nagios: UDP-based servers
@@ -108,7 +108,7 @@ Requires:   nmap
 
 %description udp_simple
 Additionnal Nagios plugins for UDP-based server.
-This application is part of the Vigilo Project <http://vigilo-nms.com>
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 
 %prep
