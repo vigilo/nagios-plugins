@@ -32,7 +32,7 @@ install: $(SUBSTFILES)
 	mkdir -p $(DESTDIR)$(NRPECONFDIR)/
 	mkdir -p $(DESTDIR)$(NCONFDIR)/vigilo.d/
 	mkdir -p $(DESTDIR)$(NEHDIR)/
-	mkdir -p $(DESTDIR)/etc/cron.daily/
+	mkdir -p $(DESTDIR)$(SYSCONFDIR)/cron.daily/
 	install -p -m 644 nrpe.cfg $(DESTDIR)$(NRPECONFDIR)/vigilo.cfg
 	install -p -m 644 vigilo.cfg $(DESTDIR)$(NCONFDIR)/vigilo.d/vigilo.cfg
 	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(NPCONFDIR)/vigilo-commands.cfg
@@ -43,7 +43,7 @@ install: $(SUBSTFILES)
 	# Installation des handlers.
 	install -p -m 755 handlers/*.pl $(DESTDIR)$(NEHDIR)/
 	# Installations des tâches périodiques (cron).
-	install -p -m 755 nagios-restart.sh $(DESTDIR)/etc/cron.daily/vigilo-nagios-restart.sh
+	install -p -m 755 nagios-restart.sh $(DESTDIR)$(SYSCONFDIR)/cron.daily/vigilo-nagios-restart.sh
 	# Installation des plugins Nagios.
 	install -p -m 755 plugins/check_* $(DESTDIR)$(NPLUGDIR)/
 	install -p -m 755 plugins/utils_vigilo.py $(DESTDIR)$(NPLUGDIR)/

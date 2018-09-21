@@ -129,6 +129,10 @@ make install \
 mkdir -p $RPM_BUILD_ROOT/%{_tmpfilesdir}
 install -m 644 pkg/vigilo-nagios.conf $RPM_BUILD_ROOT/%{_tmpfilesdir}
 
+# Depuis Nagios 4, l'ePN n'existe plus et le Collector est géré différemment.
+# Le problème de fuite mémoire associé à l'ePN ne se présente plus,
+# donc il n'est plus nécessaire de redémarrer Nagios tous les jours.
+rm -rf $RPM_BUILD_ROOT/%{_sysconfdir}/cron.daily/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -150,7 +154,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/vigilo-commands.cfg
 %attr(755,root,root) %{_libdir}/nagios/plugins/eventhandlers/nagios2vigilo.pl
 %attr(644,root,root) %{_libdir}/nagios/plugins/utils_vigilo.py*
-%attr(755,root,root) /etc/cron.daily/*.sh
 %attr(644,root,root) %{_tmpfilesdir}/vigilo-nagios.conf
 # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/nagios-plugin-commands.cfg
