@@ -1,5 +1,7 @@
 %define module  nagios-plugins
 %define nagios_plugins_cfg plugins.d
+# Le code est noarch, mais dépend du chemin vers les plugins Nagios (arch-dependent)
+%global debug_package %{nil}
 
 Name:       vigilo-%{module}
 Summary:    Additional Nagios plugins
