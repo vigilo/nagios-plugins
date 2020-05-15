@@ -19,6 +19,7 @@ Requires:   vigilo-nagios-plugins-https_via_proxy
 Requires:   vigilo-nagios-plugins-ipmi
 Requires:   vigilo-nagios-plugins-megaraid
 Requires:   vigilo-nagios-plugins-raid
+Requires:   vigilo-nagios-plugins-systemd
 Requires:   vigilo-nagios-plugins-sysuptime
 Requires:   vigilo-nagios-plugins-udp_simple
 # sudo est requis par la tâche cron de redémarrage de Nagios
@@ -92,6 +93,15 @@ Requires:   sudo
 
 %description raid
 Additionnal Nagios plugin for software RAID on Linux.
+This application is part of the Vigilo Project <https://www.vigilo-nms.com>
+
+%package    systemd
+Summary:    Additional plugins for Nagios: systemd
+Group:      Applications/System
+
+%description systemd
+Additional Nagios plugin that checks system health and service (unit) status
+on systems using systemd (https://systemd.io/).
 This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    sysuptime
@@ -193,6 +203,11 @@ rm -rf $RPM_BUILD_ROOT
 %files raid
 %defattr(644,root,root,755)
 %attr(755,root,root) %_libdir/nagios/plugins/check_raid
+
+%files systemd
+%defattr(644,root,root,755)
+%attr(755,root,root) %_libdir/nagios/plugins/check_systemd
+%config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_systemd.cfg
 
 %files sysuptime
 %defattr(644,root,root,755)

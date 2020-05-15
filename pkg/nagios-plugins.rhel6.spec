@@ -129,6 +129,10 @@ make install \
     LOCALSTATEDIR=%{_localstatedir} \
     PYTHON=%{_bindir}/python
 
+# systemd is not available on RHEL/CentOS 6
+rm -f $RPM_BUILD_ROOT/%_libdir/nagios/plugins/check_systemd
+rm -f $RPM_BUILD_ROOT/%{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_systemd.cfg
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT

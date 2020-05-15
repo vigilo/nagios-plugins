@@ -1,0 +1,250 @@
+#!/bin/bash
+# Copyright (C) 2020 CS-SI
+# License: GNU GPL v2 <http://www.gnu.org/licenses/gpl-2.0.html>
+
+properties=SystemState,LoadState,ActiveState,SubState,UnitFileState,UnitFilePreset,KernelTimestamp,ActiveEnterTimestamp,ActiveExitTimestamp,FragmentPath,SourcePath
+state_OK=0
+state_WARNING=1
+state_CRITICAL=2
+state_UNKNOWN=3
+
+exitmsg() {
+    code=$1
+    case $code in
+        0) state=OK;;
+        1) state=WARNING;;
+        2) state=CRITICAL;;
+        *) state=UNKNOWN;;
+    esac
+    shift 1
+    echo "$state: $*"
+    exit $code
+}
+
+showhelp() {
+  exec >&2
+  echo "Usage: $0 [options]"
+  echo ""
+  echo "Options:"
+  echo "  -H [<user>@]<hostname>[:<port>][/<container>]"
+  echo "                 Query <hostname> through SSH instead of the local system."
+  echo "                 IPv6 addresses must be put inside brackets (eg. [::1])."
+  echo "                 If <user> is given, it specifies the SSH login to use."
+  echo "                 If <port> is given, it is used instead of the default 22."
+  echo "                 If <container> is given, query the instance of systemd running"
+  echo "                 inside that container. A recent enough version of systemctl"
+  echo "                 is needed to use the <port> & <container> fields."
+  echo "  -u <unit>      Check the state of the given systemd <unit>."
+  echo "                 If omitted, the overall health of the system is checked."
+  echo "  -s <state>     Comma-separated list of unit states deemed appropriate."
+  echo "                 Defaults to 'active,reloading,activating'."
+  echo "                 See systemd's documentation on ActiveState for more information."
+  echo "                 Ignored unless -u is also used."
+  echo "  -f <state>     Expected state for the unit file (eg. 'disabled' or 'masked')."
+  echo "                 If omitted, a CRITICAL alarm is raised when the actual state"
+  echo "                 is 'bad'. This can be disabled by passing -f bad."
+  echo "                 Otherwise, a CRITICAL alarm is raised when the actual state"
+  echo "                 does not match the expectation."
+  echo "                 Ignored unless -u is also used."
+  echo "  -d             Enable debug mode."
+  echo "  -h             Show this help and exit."
+  echo ""
+  echo "When -u is used, a CRITICAL alarm will be raised if a bad setting"
+  echo "is detected, the unit cannot be found or an unexpected error occurs."
+  exit $state_UNKNOWN
+}
+
+host=""
+unit=""
+unitstate=active,reloading,activating
+filestate=""
+debug=0
+while getopts ":H:u:s:f:dh" arg; do
+  case "$arg" in
+    \?)
+      echo "Unknown option '$OPTARG'. Run $0 -h for help."
+      exit $state_UNKNOWN
+      ;;
+    :)
+      echo "'$OPTARG' requires an argument. Run $0 -h for help."
+      exit $state_UNKNOWN
+      ;;
+    H)
+      host=$OPTARG
+      ;;
+    u)
+      unit=$OPTARG
+      ;;
+    s)
+      unitstate=$OPTARG
+      ;;
+    f)
+      filestate=$OPTARG
+      ;;
+    d)
+      debug=1
+      ;;
+    h)
+      showhelp
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if [ $# -gt 0 ]; then
+  echo "Too many arguments. Run $0 -h for help."
+  exit $state_UNKNOWN;
+fi
+
+if [ $debug -eq 1 ]; then
+  exec 3>&2
+else
+  exec 3>/dev/null
+fi
+
+# Build the command's arguments.
+set - -- $unit
+if [ -n "$host" ]; then
+  set - -H "$host" "$@"
+fi
+
+now=$(date -u +%s)
+echo TZ=UTC LC_ALL=C systemctl show -p "$properties" "$@" >&3
+results=$(TZ=UTC LC_ALL=C systemctl show -p "$properties" "$@" 2>&3)
+printf '%s\n' "$results" >&3
+if [ -z "$results" ]; then
+  exitmsg $state_UNKNOWN "Could not query systemd. Check the SSH connection.|uptime=U"
+fi
+
+# Set a variable matching each property
+while read -r -d, v; do
+  if [ -z "$v" ]; then
+    continue
+  fi
+  printf -v "$v" "%s" "$(printf '%s' "$results" | grep "^$v=" | cut -d= -f2-)"
+done < <(echo "$properties,")
+
+if [ -z "$unit" ]; then
+  # SystemState=running,degraded,initializing,starting,maintenance,stopping,offline,unknown
+  code=$state_UNKNOWN
+  msg="System state: $SystemState"
+
+  case $SystemState in
+    running)
+      code=$state_OK
+      ;;
+    degraded|initializing|starting)
+      code=$state_WARNING
+      ;;
+    unknown)
+      code=$state_UNKNOWN
+      ;;
+    *)
+      code=$state_CRITICAL
+      ;;
+  esac
+
+  case $SystemState in
+    running|degraded|initializing|starting|maintenance|stopping)
+      uptime=$((now - $(date -d "$KernelTimestamp" +%s)))
+      hms=$(date -ud @$uptime +'%-H hour(s), %-M minute(s) and %-S second(s)')
+      msg="$msg. Up since $KernelTimestamp; $((uptime / 86400)) day(s), $hms ago|uptime=${uptime}s"
+      ;;
+    *)
+      msg="$msg|uptime=U"
+      ;;
+  esac
+  exitmsg $code $msg
+fi
+
+#########################################################################
+
+# LoadState=loaded,not-found,bad-setting,error,masked
+# ActiveState=active,reloading,inactive,failed,activating,deactivating
+# SubState=dead,running
+# UnitFileState=enabled,enabled-runtime,disabled,masked,masked-runtime,static,indirect,generated,transient,bad
+
+if [ -n "$SourcePath" ]; then
+  msg="$SourcePath"
+else
+  msg="$FragmentPath"
+fi
+
+if [ -n "$UnitFileState" ]; then
+  msg="$msg; $UnitFileState"
+fi
+
+if [ -n "$UnitFilePreset" ]; then
+  msg="$msg; vendor preset: $UnitFilePreset"
+fi
+
+if [ -n "$msg" ]; then
+  msg=" ($msg)"
+fi
+
+msg="Loaded: $LoadState$msg"
+msg="$msg / Active: $ActiveState ($SubState)"
+
+dummy=""
+case "$ActiveState" in
+  active|reloading|activating)
+    code=$state_WARNING
+    timestamp=ActiveEnterTimestamp
+    ;;
+  inactive|deactivating|failed)
+    code=$state_CRITICAL
+    timestamp=ActiveExitTimestamp
+    ;;
+  *)
+    code=$state_UNKNOWN
+    timestamp=dummy
+    ;;
+esac
+
+if [ -n "${!timestamp}" ]; then
+  since=$((now - $(date -ud "${!timestamp}" +%s)))
+  hms=$(date -ud @$since +'%-H hour(s), %-M minute(s) and %-S second(s)')
+  msg="$msg since ${!timestamp}; $((since / 86400)) day(s), $hms ago"
+
+  if [ "$timestamp" = "ActiveEnterTimestamp" ]; then
+    msg="$msg|uptime=${since}s"
+  else
+    msg="$msg|uptime=0s"
+  fi
+else
+    msg="$msg|uptime=U"
+fi
+
+
+# Check LoadState
+case "$LoadState" in
+  not-found)
+    exitmsg $state_CRITICAL "Unit $unit could not be found"
+    ;;
+  bad-setting)
+    exitmsg $state_CRITICAL "Bad setting detected in unit $unit|uptime=U"
+    ;;
+  error)
+    exitmsg $state_CRITICAL "Unexpected error during the check of unit $unit|uptime=U"
+    ;;
+esac
+
+# Check UnitFileState
+if [ -z "$filestate" ] && [ "$UnitFileState" != "bad" ]; then
+  filestate="$UnitFileState"
+fi
+if [ "$UnitFileState" != "$filestate" ]; then
+  exitmsg $state_CRITICAL $msg
+fi
+
+# Check ActiveState
+while read -r -d, v; do
+  if [ -z "$v" ]; then
+    continue
+  fi
+  if [ "$ActiveState" = "$v" ]; then
+    code=$state_OK
+    break
+  fi
+done < <(printf '%s' "$unitstate,")
+exitmsg $code $msg

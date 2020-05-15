@@ -55,6 +55,7 @@ install: $(SUBSTFILES)
 	install -p -m 644 conf/check_megaraid.cfg $(DESTDIR)$(NPCONFDIR)/
 	install -p -m 644 conf/check_proxy_ssl.cfg $(DESTDIR)$(NPCONFDIR)/
 	install -p -m 644 conf/check_udp_simple.cfg $(DESTDIR)$(NPCONFDIR)/
+	install -p -m 644 conf/check_systemd.cfg $(DESTDIR)$(NPCONFDIR)/
 ifeq ($(DISTRO),redhat)
 	# Sur Red Hat, les plugins ne sont pas fournis avec leur configuration.
 	install -p -m 644 nagios-plugin-commands.cfg $(DESTDIR)$(NPCONFDIR)/

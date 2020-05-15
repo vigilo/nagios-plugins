@@ -1,0 +1,9 @@
+define command{
+    command_name    check_systemd_health
+    command_line    @PLUGINDIR@/check_systemd -H $HOSTADDRESS$
+}
+
+define command{
+    command_name    check_systemd_unit
+    command_line    @PLUGINDIR@/check_systemd -H $HOSTADDRESS$ -u $ARG1$
+}
