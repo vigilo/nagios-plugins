@@ -126,7 +126,6 @@ make install \
     DESTDIR=$RPM_BUILD_ROOT \
     LIBDIR=%{_libdir} \
     BINDIR=%{_bindir} \
-    LOCALSTATEDIR=%{_localstatedir} \
     PYTHON=%{_bindir}/python
 
 # systemd is not available on RHEL/CentOS 6
@@ -151,7 +150,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/nagios/plugins/eventhandlers/nagios2vigilo.pl
 %attr(644,root,root) %{_libdir}/nagios/plugins/utils_vigilo.py*
 %attr(755,root,root) %{_sysconfdir}/cron.daily/*.sh
-%dir %attr(775,nagios,nagios) %{_localstatedir}/lib/vigilo/%{module}/
 # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/nagios-plugin-commands.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_dummy.cfg

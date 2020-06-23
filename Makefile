@@ -33,7 +33,6 @@ install: $(SUBSTFILES)
 	mkdir -p $(DESTDIR)$(NCONFDIR)/vigilo.d/
 	mkdir -p $(DESTDIR)$(NEHDIR)/
 	mkdir -p $(DESTDIR)$(SYSCONFDIR)/cron.daily/
-	mkdir -p $(DESTDIR)$(LOCALSTATEDIR)/lib/vigilo/$(NAME)/
 	install -p -m 644 nrpe.cfg $(DESTDIR)$(NRPECONFDIR)/vigilo.cfg
 	install -p -m 644 vigilo.cfg $(DESTDIR)$(NCONFDIR)/vigilo.d/vigilo.cfg
 	install -p -m 644 vigilo-commands.cfg $(DESTDIR)$(NPCONFDIR)/vigilo-commands.cfg
