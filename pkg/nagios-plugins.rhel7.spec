@@ -1,5 +1,10 @@
 %define module  nagios-plugins
 %define nagios_plugins_cfg plugins.d
+%define selinux_module vigilo-nagios-config
+
+%global selinux_types %(%{__awk} '/^#[[:space:]]*SELINUXTYPE=/,/^[^#]/ { if ($3 == "-") printf "%s ", $2 }' /etc/selinux/config 2>/dev/null)
+%global selinux_variants %([ -z "%{selinux_types}" ] && echo mls targeted || echo %{selinux_types})
+
 # Le code est noarch, mais dépend du chemin vers les plugins Nagios (arch-dependent)
 %global debug_package %{nil}
 
@@ -25,12 +30,10 @@ Requires:   vigilo-nagios-plugins-udp_simple
 # sudo est requis par la tâche cron de redémarrage de Nagios
 Requires:   sudo
 
-
 %description
 Additional Nagios plugins
 Additionnal plugins for the Nagios supervision system
 This application is part of the Vigilo Project <https://www.vigilo-nms.com>
-
 
 %package    -n vigilo-nagios-config
 Summary:    Nagios configuration for Vigilo
@@ -40,6 +43,19 @@ Requires:   nagios-plugins-icmp
 
 %description -n vigilo-nagios-config
 This contains the Vigilo configuration for Nagios.
+This package is part of the Vigilo Project <https://www.vigilo-nms.com>
+
+%package    -n vigilo-nagios-config-selinux
+Summary:    SELinux policy for Nagios related to Vigilo-specific settings
+BuildRequires: hardlink
+%{selinux_requires}
+Requires:   vigilo-nagios-config = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires(post):   /usr/sbin/semodule
+Requires(postun): /usr/sbin/semodule
+
+%description -n vigilo-nagios-config-selinux
+This contains the policy module required to make Vigilo and Nagios work
+on SELinux-enabled systems.
 This package is part of the Vigilo Project <https://www.vigilo-nms.com>
 
 %package    -n vigilo-nrpe-config
@@ -127,6 +143,14 @@ This application is part of the Vigilo Project <https://www.vigilo-nms.com>
 %setup -q -n %{name}-%{version}@PREVERSION@
 
 %build
+cd selinux
+for selinuxvariant in %{selinux_variants}
+do
+  make NAME=${selinuxvariant} -f /usr/share/selinux/devel/Makefile
+  mv %{selinux_module}.pp %{selinux_module}.pp.${selinuxvariant}
+  make NAME=${selinuxvariant} -f /usr/share/selinux/devel/Makefile clean
+done
+cd -
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -141,6 +165,14 @@ make install \
 mkdir -p $RPM_BUILD_ROOT/%{_tmpfilesdir}
 install -m 644 pkg/vigilo-nagios.conf $RPM_BUILD_ROOT/%{_tmpfilesdir}
 
+for selinuxvariant in %{selinux_variants}
+do
+  install -d %{buildroot}%{_datadir}/selinux/${selinuxvariant}
+  install -p -m 644 selinux/%{selinux_module}.pp.${selinuxvariant} \
+    %{buildroot}%{_datadir}/selinux/${selinuxvariant}/%{selinux_module}.pp
+done
+/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
+
 # Depuis Nagios 4, l'ePN n'existe plus et le Collector est géré différemment.
 # Le problème de fuite mémoire associé à l'ePN ne se présente plus,
 # donc il n'est plus nécessaire de redémarrer Nagios tous les jours.
@@ -153,6 +185,20 @@ rm -rf $RPM_BUILD_ROOT
 %post -n vigilo-nagios-config
 %tmpfiles_create %{_tmpfilesdir}/vigilo-nagios.conf
 
+%post -n vigilo-nagios-config-selinux
+for selinuxvariant in %{selinux_variants}
+do
+  /usr/sbin/semodule -s ${selinuxvariant} -i \
+    %{_datadir}/selinux/${selinuxvariant}/%{selinux_module}.pp &> /dev/null || :
+done
+
+%postun -n vigilo-nagios-config-selinux
+if [ $1 -eq 0 ] ; then
+  for selinuxvariant in %{selinux_variants}
+  do
+    /usr/sbin/semodule -s ${selinuxvariant} -r %{selinux_module} &> /dev/null || :
+  done
+fi
 
 %post -n vigilo-nrpe-config
 /sbin/service nrpe condrestart > /dev/null 2>&1 || :
@@ -172,6 +218,11 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_dummy.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_icmp.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/check_tcp.cfg
+
+%files -n vigilo-nagios-config-selinux
+%defattr(-,root,root,0755)
+%doc selinux/*
+%{_datadir}/selinux/*/%{selinux_module}.pp
 
 %files -n vigilo-nrpe-config
 %defattr(644,root,root,755)
