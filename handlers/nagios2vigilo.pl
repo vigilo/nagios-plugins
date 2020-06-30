@@ -3,7 +3,7 @@
 ################################################################################
 ## Nagios notification script (send states to Vigilo)
 ##
-## Copyright (C) 2007-2020 CS-SI
+## Copyright (C) 2007-2020 CS GROUP – France
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -44,7 +44,6 @@ sub print_usage () {
 
 sub print_help () {
     print "Nagios to Vigilo notification script\n";
-    print "Copyright (C) 2007-2011 CS-SI\n";
     print "This plugin transmits event or state to Vigilo\n\n";
     print_usage();
 }
