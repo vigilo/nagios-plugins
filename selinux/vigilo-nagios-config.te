@@ -2,6 +2,7 @@ module vigilo-nagios-config 1.0;
 
 require {
     type nagios_t;
+    type nagios_script_t;
     type tmpfs_t;
     class dir { add_name read remove_name write };
     class fifo_file { create open read write };
@@ -15,3 +16,5 @@ allow nagios_t tmpfs_t:fifo_file { create open read write };
 allow nagios_t tmpfs_t:file { create getattr open read rename setattr unlink write };
 allow nagios_t tmpfs_t:sock_file { create write unlink };
 
+# Allow nagios' web interface to access the status file in /dev/shm/nagios/...
+allow nagios_script_t tmpfs_t:file read;
