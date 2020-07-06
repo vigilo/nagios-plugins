@@ -50,8 +50,8 @@ Summary:    SELinux policy for Nagios related to Vigilo-specific settings
 BuildRequires: hardlink
 %{selinux_requires}
 Requires:   vigilo-nagios-config = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires(post):   /usr/sbin/semodule, /sbin/restorecon
-Requires(postun): /usr/sbin/semodule, /sbin/restorecon
+Requires(post):   /usr/sbin/semodule
+Requires(postun): /usr/sbin/semodule
 
 %description -n vigilo-nagios-config-selinux
 This contains the policy module required to make Vigilo and Nagios work
@@ -191,7 +191,6 @@ do
   /usr/sbin/semodule -s ${selinuxvariant} -i \
     %{_datadir}/selinux/${selinuxvariant}/%{selinux_module}.pp &> /dev/null || :
 done
-/sbin/restorecon -R /dev/shm/nagios || :
 
 %postun -n vigilo-nagios-config-selinux
 if [ $1 -eq 0 ] ; then
@@ -200,7 +199,6 @@ if [ $1 -eq 0 ] ; then
     /usr/sbin/semodule -s ${selinuxvariant} -r %{selinux_module} &> /dev/null || :
   done
 fi
-[ -d /dev/shm/nagios ] && /sbin/restorecon -R /dev/shm/nagios &> /dev/null || :
 
 %post -n vigilo-nrpe-config
 /sbin/service nrpe condrestart > /dev/null 2>&1 || :
