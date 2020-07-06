@@ -17,4 +17,4 @@ allow nagios_t tmpfs_t:file { create getattr open read rename setattr unlink wri
 allow nagios_t tmpfs_t:sock_file { create write unlink };
 
 # Allow nagios' web interface to access the status file in /dev/shm/nagios/...
-allow nagios_script_t tmpfs_t:file read;
+allow nagios_script_t tmpfs_t:file { open read };
