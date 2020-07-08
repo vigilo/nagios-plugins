@@ -1,1 +1,8 @@
 policy_module(vigilo-nagios-config, 1.0)
+
+gen_require(`
+    type nagios_t;
+    type var_lib_t;
+')
+
+allow nagios_t var_lib_t:sock_file write;
