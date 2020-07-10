@@ -208,10 +208,11 @@ fi
 %defattr(644,root,root,755)
 %doc COPYING.txt README.txt
 %dir %{_sysconfdir}/nagios/vigilo.d
+%dir %{_libdir}/nagios/plugins/utils_vigilo
 %config(noreplace) %{_sysconfdir}/nagios/vigilo.d/vigilo.cfg
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/vigilo-commands.cfg
 %attr(755,root,root) %{_libdir}/nagios/plugins/eventhandlers/nagios2vigilo.pl
-%attr(644,root,root) %{_libdir}/nagios/plugins/utils_vigilo.py*
+%attr(644,root,root) %{_libdir}/nagios/plugins/utils_vigilo/__init__.py*
 %attr(644,root,root) %{_tmpfilesdir}/vigilo-nagios.conf
 # Sur Red Hat, les plugins ne sont pas fournis avec leur fichier de conf
 %config(noreplace) %{_sysconfdir}/nagios/%{nagios_plugins_cfg}/nagios-plugin-commands.cfg

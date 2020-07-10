@@ -27,7 +27,7 @@ plugins/%: plugins/%.in
 
 
 install: $(SUBSTFILES)
-	mkdir -p $(DESTDIR)$(NPLUGDIR)/
+	mkdir -p $(DESTDIR)$(NPLUGDIR)/utils_vigilo/
 	mkdir -p $(DESTDIR)$(NPCONFDIR)/
 	mkdir -p $(DESTDIR)$(NRPECONFDIR)/
 	mkdir -p $(DESTDIR)$(NCONFDIR)/vigilo.d/
@@ -46,7 +46,7 @@ install: $(SUBSTFILES)
 	install -p -m 755 nagios-restart.sh $(DESTDIR)$(SYSCONFDIR)/cron.daily/vigilo-nagios-restart.sh
 	# Installation des plugins Nagios.
 	install -p -m 755 plugins/check_* $(DESTDIR)$(NPLUGDIR)/
-	install -p -m 755 plugins/utils_vigilo.py $(DESTDIR)$(NPLUGDIR)/
+	install -p -m 755 plugins/utils_vigilo.py $(DESTDIR)$(NPLUGDIR)/utils_vigilo/__init__.py
 	rm -f $(DESTDIR)$(NPLUGDIR)/*.in
 	# Installation des configurations des plugins Nagios.
 	install -p -m 644 conf/check_cpu.cfg $(DESTDIR)$(NPCONFDIR)/

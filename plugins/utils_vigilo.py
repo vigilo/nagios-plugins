@@ -6,6 +6,11 @@
 from __future__ import print_function
 import sys
 
+__all__ = (
+    'OK', 'WARNING', 'CRITICAL', 'UNKNOWN',
+    'UP', 'DOWN', 'UNREACHABLE',
+    'get_state', 'exit_nagios', 'check_range',
+)
 
 # Codes d'état pour les services
 OK          = 0
