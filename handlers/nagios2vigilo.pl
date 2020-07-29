@@ -76,7 +76,7 @@ if ( $event && $nb_param eq 6) {
     # lorsqu'on force l'envoi d'une notification.
     # On ne traite que les HARD states dans ce script.
     if (lc(pop(@ARGV)) eq "soft") {
-        return;
+        exit $ERRORS{'OK'};
     }
 
 } elsif ( $state && $nb_param eq 8) {
