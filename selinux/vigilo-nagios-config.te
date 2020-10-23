@@ -3,6 +3,13 @@ policy_module(vigilo-nagios-config, 1.0)
 gen_require(`
     type nagios_t;
     type var_lib_t;
+    type nagios_unconfined_plugin_exec_t;
+    type nagios_unconfined_plugin_t;
 ')
 
+# Grant nagios the permissions needed to write into vigilo-connector-nagios' socket
 allow nagios_t var_lib_t:sock_file write;
+
+# Grant nagios access & execution permissions on custom checks
+allow nagios_t nagios_unconfined_plugin_exec_t:dir search;
+allow nagios_t nagios_unconfined_plugin_t:process2 nosuid_transition;
