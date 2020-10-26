@@ -1,6 +1,0 @@
-# -*- python -*-
-
-from Config import addFilter
-
-addFilter("[EW]: no-documentation")
-addFilter("E: empty-debuginfo-package")
