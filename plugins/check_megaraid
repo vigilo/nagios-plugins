@@ -3,11 +3,20 @@
 #
 . `dirname $0`/utils.sh
 
-res=`MegaCli -LDInfo -Lall -aALL`
+PATH="/bin:/sbin:/usr/bin:/usr/sbin:/opt/MegaRAID/MegaCli/"
+export PATH
+
+if [ "$(uname -p)" = "x86_64" ]; then
+    cli=MegaCli64
+else
+    cli=MegaCli
+fi
+
+res=`$cli -LDInfo -Lall -aALL`
 code=$?
 if [ $code -ne 0 ]
 then
-    $ECHO "UNKNOWN: MegaCli returned code: $code\n"
+    $ECHO "UNKNOWN: $cli returned code: $code\n"
     exit $STATE_UNKNOWN
 fi
 
