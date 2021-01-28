@@ -3,7 +3,7 @@
 ################################################################################
 ## Nagios notification script (send states to Vigilo)
 ##
-## Copyright (C) 2007-2020 CS GROUP - France
+## Copyright (C) 2007-2021 CS GROUP - France
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
